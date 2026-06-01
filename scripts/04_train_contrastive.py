@@ -17,6 +17,7 @@ from utils.helpers import plot_training_curves, plot_confusion_matrix, save_resu
 class ContrastiveTrainer(Trainer):
     """Trainer that handles combined CE + contrastive loss"""
 
+    @tf.function
     def train_step(self, x, y):
         with tf.GradientTape() as tape:
             logits, embeddings = self.model(x, training=True)
