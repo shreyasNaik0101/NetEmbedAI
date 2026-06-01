@@ -1,0 +1,13 @@
+{
+  "model": "MLP Encoder + Contrastive Learning",
+  "accuracy": 1.0,
+  "precision": 0.9706492712237523,
+  "recall": 0.9689582178601563,
+  "f1_score": 0.9697484624874245,
+  "loss": 0.018348051235079765,
+  "num_parameters": 13734,
+  "embedding_dim": 32,
+  "ce_weight": 1.0,
+  "con_weight": 0.5,
+  "temperature": 0.07
+}

@@ -1,0 +1,10 @@
+{
+  "model": "MLP Encoder (Supervised)",
+  "accuracy": 0.9718000292778015,
+  "precision": 0.970555657486106,
+  "recall": 0.97054003377374,
+  "f1_score": 0.9705250375312856,
+  "loss": 0.06869060546159744,
+  "num_parameters": 13734,
+  "embedding_dim": 32
+}
