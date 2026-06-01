@@ -35,7 +35,7 @@ pip install -r requirements.txt
 ```
 
 ### Colab (GPU - Recommended for BiLSTM)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/traffic-classification-bilstm/blob/main/notebooks/colab_training.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/shreyasNaik0101/NetEmbedAI/blob/master/traffic_classification/notebooks/colab_training.ipynb)
 
 1. Click the badge above or upload `notebooks/colab_training.ipynb` to Colab
 2. Set Runtime → Change runtime type → **T4 GPU**
