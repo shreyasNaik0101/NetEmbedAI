@@ -1,6 +1,5 @@
 # Context-Aware Flow Embeddings for Adaptive AI-based Network Traffic Classification
 
-**Team:** Gradient_Issues
 
 ## Project Overview
 
