@@ -1,10 +1,10 @@
 {
-  "model": "MLP Encoder (Supervised)",
-  "accuracy": 0.9718000292778015,
-  "precision": 0.970555657486106,
-  "recall": 0.97054003377374,
-  "f1_score": 0.9705250375312856,
-  "loss": 0.06869060546159744,
-  "num_parameters": 13734,
+  "model": "BiLSTM (Supervised)",
+  "accuracy": 0.9154229164123535,
+  "precision": 0.9190340830552884,
+  "recall": 0.9137208386856264,
+  "f1_score": 0.9088799775061157,
+  "loss": 0.22160270810127258,
+  "num_parameters": 81446,
   "embedding_dim": 32
 }

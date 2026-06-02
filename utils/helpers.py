@@ -68,10 +68,6 @@ def plot_training_curves(history, title, save_path):
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     plt.close()
 
-    plt.tight_layout()
-    plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    plt.close()
-
 
 def print_metrics(y_true, y_pred, label_names):
     print(classification_report(y_true, y_pred, target_names=label_names))
