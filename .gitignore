@@ -4,3 +4,12 @@ __pycache__/
 *.zip
 .vscode/
 .idea/
+
+# Datasets (downloaded / generated locally, do not commit)
+data/cesnet/
+data/processed/
+*.h5
+*.npz
+
+# Trained model weights (regenerable)
+models/*.pt
