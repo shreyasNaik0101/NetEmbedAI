@@ -1,0 +1,14 @@
+{
+  "tag": "bilstm_supervised",
+  "encoder": "bilstm",
+  "mode": "supervised",
+  "morph_train": false,
+  "num_classes": 10,
+  "params": 145322,
+  "holdout_class": null,
+  "clean_acc": 0.94745,
+  "clean_f1": 0.8979874700317454,
+  "morph_acc": 0.33485,
+  "morph_f1": 0.18283313630458603,
+  "robustness_gap_f1": 0.7151543337271593
+}

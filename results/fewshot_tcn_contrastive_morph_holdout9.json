@@ -1,0 +1,50 @@
+{
+  "novel_class": 9,
+  "shots": {
+    "5": {
+      "overall_acc": 0.7887989974937344,
+      "per_class_recall": {
+        "discord": 0.9929376854599407,
+        "facebook-messenger": 0.9027242152466368,
+        "google-drive": 0.8327727272727272,
+        "instagram": 0.9572739591032274,
+        "microsoft-outlook": 0.9959481037924152,
+        "snapchat": 0.9362915006640107,
+        "spotify": 0.9069526788142508,
+        "tiktok": 0.8471333333333333,
+        "whatsapp": 0.8928781512605042,
+        "youtube": 0.277090395480226
+      }
+    },
+    "10": {
+      "overall_acc": 0.7877912060301508,
+      "per_class_recall": {
+        "discord": 0.9928419711129991,
+        "facebook-messenger": 0.901984126984127,
+        "google-drive": 0.8547230769230769,
+        "instagram": 0.9572594967932906,
+        "microsoft-outlook": 0.9959729187562688,
+        "snapchat": 0.9383072830063186,
+        "spotify": 0.9082883986928104,
+        "tiktok": 0.8451136363636363,
+        "whatsapp": 0.8955364806866952,
+        "youtube": 0.26959103763323905
+      }
+    },
+    "20": {
+      "overall_acc": 0.7869161616161616,
+      "per_class_recall": {
+        "discord": 0.9927965017064846,
+        "facebook-messenger": 0.9021113689095127,
+        "google-drive": 0.8644603174603175,
+        "instagram": 0.9572947576656775,
+        "microsoft-outlook": 0.9960081053698076,
+        "snapchat": 0.9392342342342342,
+        "spotify": 0.9088858547241945,
+        "tiktok": 0.8439523809523809,
+        "whatsapp": 0.895762331838565,
+        "youtube": 0.2655635491606715
+      }
+    }
+  }
+}

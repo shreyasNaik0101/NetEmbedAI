@@ -1,0 +1,13 @@
+{
+  "tag": "tcn_supervised",
+  "encoder": "tcn",
+  "mode": "supervised",
+  "morph_train": false,
+  "num_classes": 10,
+  "params": 93930,
+  "clean_acc": 0.9552,
+  "clean_f1": 0.9069115733529507,
+  "morph_acc": 0.30445,
+  "morph_f1": 0.20613011278641907,
+  "robustness_gap_f1": 0.7007814605665317
+}

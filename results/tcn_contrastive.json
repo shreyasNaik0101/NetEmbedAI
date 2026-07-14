@@ -1,0 +1,14 @@
+{
+  "tag": "tcn_contrastive",
+  "encoder": "tcn",
+  "mode": "contrastive",
+  "morph_train": false,
+  "num_classes": 10,
+  "params": 93930,
+  "holdout_class": null,
+  "clean_acc": 0.95795,
+  "clean_f1": 0.9100830082642908,
+  "morph_acc": 0.3526,
+  "morph_f1": 0.2681630969122691,
+  "robustness_gap_f1": 0.6419199113520218
+}
