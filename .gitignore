@@ -13,3 +13,6 @@ data/processed/
 
 # Trained model weights (regenerable)
 models/*.pt
+
+# Generated demo helper
+demo_data.json
