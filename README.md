@@ -60,6 +60,26 @@ a curated 10-app subset spanning streaming / social / messaging / cloud.
 The robust model dominates at every attack level and still holds at severity
 2–3× beyond its training intensity (generalization, not memorization).
 
+**Generalization to unseen attacks** (macro-F1 vs four attacks with *different
+mechanisms* than the training augmentation — `size_normalize`, `fragment`,
+`constant_timing`, `dummy_inject`). "Worst case" = the attacker's best choice
+(minimum over attacks), the security-relevant metric:
+
+| Model | clean | size_norm | fragment | const_timing | dummy_inj | **worst case** |
+|---|---|---|---|---|---|---|
+| TCN supervised | 0.906 | 0.185 | 0.577 | 0.182 | 0.462 | 0.182 |
+| TCN + morph (timing/count) | 0.879 | 0.182 | 0.403 | 0.800 | 0.492 | 0.182 |
+| **TCN + broad morph** | 0.809 | **0.706** | **0.775** | 0.638 | **0.663** | **0.638** |
+
+This addresses the circularity of testing on the training attack family. Two
+findings: (1) robustness **generalizes to unseen attacks on axes covered in
+training** (the narrow morph model, trained only on timing/count jitter, hits
+0.80 on the never-seen `constant_timing` attack); (2) it **fails on axes not
+covered** (size flattening, fragmentation) — until those axes are added to
+training. Broadening the augmentation lifts **worst-case** robustness from 0.18
+to **0.64 (~3.5×)**, for a ~10-point clean-F1 cost. Robustness follows the axes
+you augment — a controllable, characterized property, not a circular claim.
+
 **Embedding separation, clean vs under attack:**
 
 | Model | Clean sep. | Under attack | Retained |
@@ -98,21 +118,24 @@ python -m src.data.cesnet_loader
 
 # 2. Train (each auto-reports clean vs morphed F1)
 python -m src.train.train --mode supervised  --encoder tcn
-python -m src.train.train --mode contrastive --morph --encoder tcn   # robust
+python -m src.train.train --mode contrastive --morph --encoder tcn                  # robust (timing/count)
+python -m src.train.train --mode contrastive --morph --broad_aug --encoder tcn \
+    --tag tcn_contrastive_broadmorph                                                # robust (all axes)
 
 # 3. Evaluate
 python -m src.eval.compare                                   # comparison table
 python -m src.eval.robustness --tags tcn_supervised tcn_contrastive_morph
 python -m src.eval.embeddings --tag tcn_contrastive_morph    # t-SNE + similarity
+python -m src.eval.heldout_attacks                           # unseen-attack generalization
 ```
 
 ## Layout
 
 ```
 src/
-  data/    cesnet_loader.py  augment.py (morphing)  transforms.py
+  data/    cesnet_loader.py  augment.py (morphing + broad ops)  transforms.py
   models/  tcn.py  lstm.py  heads.py
   losses/  supcon.py
-  train/   train.py          # supervised / contrastive / morph / hold-out
-  eval/    compare.py  robustness.py  embeddings.py  fewshot.py
+  train/   train.py          # supervised / contrastive / morph / broad / hold-out
+  eval/    compare.py  robustness.py  embeddings.py  fewshot.py  heldout_attacks.py
 ```

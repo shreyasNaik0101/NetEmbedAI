@@ -29,6 +29,7 @@
 - **Phase 2** — TCN encoder → embedding head + classifier. Plain supervised first.
 - **Phase 3 (headline)** — Traffic-morphing augmentation pipeline (jitter, size padding, packet drops) + supervised contrastive loss → morph-invariant embeddings.
 - **Phase 4** — Architecture + robustness comparison table: TCN vs LSTM vs 1D-CNN vs small Transformer, each with F1 **and** params/latency/throughput, **and** clean-vs-morphed degradation.
+- **Phase 4b (done)** — Held-out attack generalization (`src/eval/heldout_attacks.py`): evaluate against attacks with *different mechanisms* than the training augmentation (size flattening, fragmentation, constant timing, dummy injection) to defeat the circularity of testing on the training attack family. Broadening the augmentation (`--broad_aug`) lifts worst-case robustness 0.18 → 0.64 (~3.5×) for a ~10-pt clean-F1 cost. Finding: robustness follows the axes you augment.
 - **Phase 5** — Few-shot recognition of a held-out class via embedding similarity (no retraining).
 - **Packaging** — CLI / Docker demo: classify flows + flag morphed ones.
 

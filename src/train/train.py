@@ -87,6 +87,8 @@ def main():
     ap.add_argument("--mode", choices=["supervised", "contrastive"], default="supervised")
     ap.add_argument("--encoder", choices=["tcn", "lstm", "bilstm"], default="tcn")
     ap.add_argument("--morph", action="store_true", help="Apply morph augmentation during training")
+    ap.add_argument("--broad_aug", action="store_true",
+                    help="Broaden morph augmentation to size-flattening + structural ops")
     ap.add_argument("--epochs", type=int, default=40)
     ap.add_argument("--batch_size", type=int, default=192)
     ap.add_argument("--lr", type=float, default=1e-3)
@@ -132,7 +134,7 @@ def main():
           f"classes={num_classes}, device={device}")
 
     normalizer = Normalizer(*fit_channel_stats(Xtr)).to(device)
-    morph = MorphAugmenter() if args.morph else None
+    morph = MorphAugmenter(broad=args.broad_aug) if args.morph else None
 
     model = TrafficNet(build_encoder(args.encoder), num_classes, args.embedding_dim).to(device)
     print(f"Model: {args.encoder}, params={model.num_parameters:,}")

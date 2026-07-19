@@ -1,0 +1,33 @@
+{
+  "severity": 1.0,
+  "results": {
+    "tcn_supervised": {
+      "clean": 0.9056670946795962,
+      "size_normalize": 0.1852370954217341,
+      "fragment": 0.5766249635003311,
+      "constant_timing": 0.1817796948913754,
+      "dummy_inject": 0.4623543552976595
+    },
+    "tcn_contrastive": {
+      "clean": 0.9083084927278742,
+      "size_normalize": 0.2447933247936695,
+      "fragment": 0.5212581230138575,
+      "constant_timing": 0.19705037294774755,
+      "dummy_inject": 0.46174792512173646
+    },
+    "tcn_contrastive_morph": {
+      "clean": 0.8789547928812571,
+      "size_normalize": 0.18203032017417803,
+      "fragment": 0.40310989020985843,
+      "constant_timing": 0.7999909736062905,
+      "dummy_inject": 0.49152014618008544
+    },
+    "tcn_contrastive_broadmorph": {
+      "clean": 0.80936110247965,
+      "size_normalize": 0.7064978930465533,
+      "fragment": 0.7750763140353663,
+      "constant_timing": 0.6376711581333179,
+      "dummy_inject": 0.662558330671381
+    }
+  }
+}
