@@ -1,0 +1,32 @@
+{
+  "version": 3,
+  "purpose": "bounded prospective development coverage; no reuse of failed calibration as training",
+  "labels": ["youtube", "spotify", "instagram", "tiktok", "snapchat", "whatsapp", "facebook-messenger", "discord", "google-drive", "microsoft-outlook"],
+  "local_target_labels": ["youtube", "instagram"],
+  "existing_training_trials": ["instagram-dev-01", "youtube-dev-01", "instagram-dev-02", "youtube-dev-02"],
+  "trials": [
+    {"id": "instagram-dev-03", "role": "train", "activity": "Home feed/photos: scroll for 60 seconds; leave Reels for its separate recording."},
+    {"id": "instagram-dev-04", "role": "train", "activity": "Reels: watch several different clips for 60 seconds."},
+    {"id": "instagram-dev-05", "role": "train", "activity": "On a later date, browse Explore/search and two or three public profiles for 60 seconds.", "later_date_than": "instagram-dev-03"},
+    {"id": "youtube-dev-03", "role": "train", "activity": "Choose a video from the home page and watch for 60 seconds."},
+    {"id": "instagram-dev-06", "role": "selection", "activity": "Fresh selection visit: mix feed scrolling and Reels for 60 seconds."},
+    {"id": "youtube-dev-04", "role": "selection", "activity": "Fresh selection visit: choose a different video and watch for 60 seconds."}
+  ],
+  "train_trials": ["instagram-dev-01", "youtube-dev-01", "instagram-dev-02", "youtube-dev-02", "instagram-dev-03", "instagram-dev-04", "instagram-dev-05", "youtube-dev-03"],
+  "selection_trials": ["instagram-dev-06", "youtube-dev-04"],
+  "protected_trial_ids": ["instagram-cal-01", "youtube-cal-01", "instagram-cal-02", "youtube-cal-02"],
+  "reserved_future_calibration": ["instagram-cal-03", "youtube-cal-03"],
+  "reserved_future_final": ["instagram-eval-01", "youtube-eval-01"],
+  "eligibility": "mapped-valid-prefix-v1",
+  "eligibility_description": "Retain every fixed-matcher reference in inventory. Export every mapped supported flow with >=5 actual packets, unique socket, no missing browser prefix and zero within-direction payload-size mismatch. Record every feature exclusion; never select by activity, model prediction or confidence. Other supported references remain saved and explicitly unscored by the two-target local study.",
+  "minimum_training_connections": {"instagram": 20, "youtube": 12},
+  "minimum_selection_connections": {"instagram": 6, "youtube": 6},
+  "minimum_selection_full_prefix_connections": {"instagram": 3, "youtube": 3},
+  "minimum_new_instagram_training_dates": 2,
+  "local_utc_offset_minutes": 330,
+  "selection_gap_minutes": 60,
+  "capture_duration_cap_seconds": 120,
+  "window_condition": "Refresh the rebuilt Edge app; keep Edge and normal Chrome visible side by side. Default Strip private information NetLog, raw/sensitive bytes off, both logs before opening a fresh target connection.",
+  "training_protocol": {"families": ["existing compact TCN with CE only", "same-data summary forest"], "seeds": [17, 42, 123], "first_seed": 17, "stop_repetitions_if_first_seed_ineligible": true, "no_ordered_feature_sweep": true},
+  "limits": "Six new deliberate captures maximum in this plan, not an open-ended request to repeat calibration. If support/quality gates fail, record the shortfall; no automatic extra capture, role rewrite, relaxed acceptance rule or guaranteed improvement. Timing/order parity and small-sample limits remain explicit."
+}

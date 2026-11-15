@@ -1,0 +1,63 @@
+{
+  "version": "hotspot-family-feasibility-v1",
+  "declared_utc": "2026-11-04T12:32:00+00:00",
+  "purpose": "At most two user-started hotspot visits to establish real IPv6 training acquisition feasibility; distinct from closed campus scope",
+  "source_bundle": "experiments/full-real/20261024-151720-3532794c/bundle",
+  "source_artifact_id": "18c43fe12262b81d4a3001df150a278865f3908ddd3aab934822fc0c9e5750fb",
+  "interface": "9",
+  "offset_minutes": 330,
+  "trials": [
+    {
+      "id": "hotspot-train-yt-01",
+      "target": "youtube",
+      "role": "train",
+      "day": 1,
+      "activity": "Watch a different YouTube video for 60 seconds."
+    },
+    {
+      "id": "hotspot-train-ig-01",
+      "target": "instagram",
+      "role": "train",
+      "day": 1,
+      "activity": "Scroll feed30 seconds, then watch different Reels30 seconds."
+    }
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "minimum_target_at_10_per_trial": 3,
+  "minimum_target_at_30_per_trial": 1,
+  "eligibility": "mapped-valid-prefix-v1; all supported mapped flows retained; ambiguous/unmapped inventory preserved; no prediction-based exclusion",
+  "collection": "Normal Chrome and Edge app visible; Wi-Fi; reference checkbox on; longer-window statistics off; Strip private information NetLog, sensitive/raw bytes off; cap 120 seconds. User starts both logs before fresh target navigation.",
+  "attempts": "Two fixed slots, one stopped attempt per slot. Coverage/QC failure stops; processing errors preserve same capture. Do not reopen campus slots.",
+  "limits": "Training acquisition feasibility only on user-declared hotspot. All old calibration/comparison/campus-study roles remain unchanged. No classifier/scoring/default activation. Real QUIC IPv6 support must pass independent reference/QC. No routing changes or automatic capture.",
+  "workflow": "family_development",
+  "candidate": {
+    "bundle": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle",
+    "metadata": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle/metadata.json",
+      "sha256": "bd79923fabc4816cc2f15b4f150a5d3b428663c455d0fde3da6ab219eb666d62"
+    }
+  },
+  "candidate_weight_sha256": "fc735ea2f5e821bfba3832a588bdb3e62fde7a0c8f47c55567cb4cd5a2ee0494",
+  "family_rules": {
+    "training_family": 6,
+    "minimum_per_cell_at10": 3,
+    "minimum_per_cell_at30": 1
+  },
+  "scoring": "No fitting, ranking, confidence calibration, model selection, freeze or deployment in this scope. Source-model replay verifies pipeline consistency only. A successful pair ends at acquisition feasibility; future use needs separately bound training declaration.",
+  "scope": "feasibility_only",
+  "network_context": {
+    "type": "user_declared_mobile_hotspot",
+    "connectivity_report": "experiments\\mobile-hotspot-ipv6-check-v1\\report.json",
+    "connectivity_report_sha256": "6fda779a5cb7273747ad81a02d570919bbcf28e5d678cc5f34b7484ee06fdce8",
+    "limits": "Different network domain; not a controlled IPv4/IPv6 causal comparison or campus quality evidence. No SSID or addresses used as model inputs."
+  }
+}

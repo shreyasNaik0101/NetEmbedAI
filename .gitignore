@@ -16,3 +16,16 @@ models/*.pt
 
 # Generated demo helper
 demo_data.json
+
+# v2 local environments and generated evidence
+.venv/
+ui/node_modules/
+ui/dist/
+*.tsbuildinfo
+data/recovered/
+experiments/*/
+artifacts/local/
+build/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/

@@ -1,0 +1,167 @@
+{
+  "version": "pool-linear-probe-v1",
+  "purpose": "One fixed offline development screen; no new collection, calibration, deployment or final evaluation",
+  "layer": "backbone_model.cnn_ppi_global_pool output before mlp_shared; 448 unnormalized features",
+  "paper": "https://arxiv.org/html/2502.12930v2#S5.SS1",
+  "paper_limits": "Matches the feature tap, not all paper settings. Published weights unchanged: no unseen-size embedding repair or fine tuning. Local data, weighted scaling and head settings are ours.",
+  "data_manifest_sha256": "46ef59ce749e8c3da1d7bde4597e1e9697a7e97a046f01a48af0ec5f0612eae3",
+  "role_config": {
+    "path": "configs/browser-selection-followup-v1-seed17.json",
+    "sha256": "3910970c8e1079cd6e2e1269a733e75117478ae99796f2b160a065310c1f3ad2"
+  },
+  "parent_data_manifest": {
+    "path": "experiments/browser-adaptation/selection-followup-v1-seed17/data-manifest.json",
+    "sha256": "83bac5d76a1b44f9276147b6f2968bb672266e01a6c4bfa260b5279d958883ac"
+  },
+  "local_train_counts": {
+    "instagram": 22,
+    "youtube": 21
+  },
+  "local_selection_counts": {
+    "instagram": 7,
+    "youtube": 10
+  },
+  "public_train_count": 14000,
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "local_fraction": 0.25,
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "seed": 17,
+  "threads": 2,
+  "batch_size": 128,
+  "head": {
+    "C": 1.0,
+    "solver": "lbfgs",
+    "penalty": "l2",
+    "max_iter": 500,
+    "tol": 1e-05,
+    "random_state": 17
+  },
+  "prefix_weighting": "Each training flow at min(length,budget) for all four budgets, with a quarter of flow mass each. One shared ten-class head.",
+  "weight_normalization": "Flow weights sum to number of flows; local class balanced; 75% public and 25% local mass.",
+  "scaling": "StandardScaler weighted on training embeddings only; no L2 feature normalization",
+  "public_control_per_class": 50,
+  "gate": {
+    "local_f1_floor": 0.75,
+    "gain_over_best_fixed_forest": 0.01,
+    "per_service_recall_floor": 0.65,
+    "per_service_nonregression": "against both fixed forests",
+    "historical_control_loss_vs_b17": 0.02
+  },
+  "public_control_limit": "Week45 retrospective to upstream week46 pretraining; not independent forward retention. Week46 final never accessed.",
+  "stop": "One deterministic head; stop on nonconvergence or failed gate. No layer, solver, seed, weighting or regularization sweep. Passing only motivates independently declared future validation.",
+  "benchmark": {
+    "warmup": 20,
+    "calls": 100,
+    "path": "experiments/browser-adaptation/pilot-01/benchmark-flow.json",
+    "sha256": "c9b9226946ddd3745249a62bad60c0e8125c98d868083b305b9e2ccfc11e654b"
+  },
+  "selection_limit": "17 connections / 3 visits reused from completed development; 63 correlated prefix cases, not untouched evaluation.",
+  "upstream_weight_sha256": "dc4b3333388239ac25b8c028c922965e2333cc151dd5fad951950099e86fabc4",
+  "upstream_wheel_sha256": "86acb26e5c1595e2d80546bc44859e3d0daf271a20cbb7fbc829fd513a56154b",
+  "train_trials": [
+    "instagram-dev-01",
+    "youtube-dev-01",
+    "instagram-dev-02",
+    "youtube-dev-02",
+    "instagram-dev-03",
+    "instagram-dev-04",
+    "instagram-dev-05",
+    "youtube-dev-03"
+  ],
+  "selection_trials": [
+    "instagram-dev-06",
+    "youtube-dev-04",
+    "youtube-dev-05"
+  ],
+  "trial_bindings": {
+    "instagram-dev-01": {
+      "summary_sha256": "2cc5b949345df0592558cc79b666ace3b515ab25241ba5e6b65f59ea3333660e",
+      "rows_sha256": "5d5c02f9ff74034e575b44efc2a7f7cb54f049fd78acbd3cbb95a322f57fae3b",
+      "session_id": "2d52f7cf9390494287bca318d3912d63"
+    },
+    "youtube-dev-01": {
+      "summary_sha256": "bc42b72dfeeb68bac92dcf15736f11652e1a73e9be989395135e00cacd4dcc71",
+      "rows_sha256": "c4b95e65cb3f1a81061404b998426d0c606840347d957bb0a67a2350fb6eb84b",
+      "session_id": "3a6e0763446c4161a36f1c467899e1dc"
+    },
+    "instagram-dev-02": {
+      "summary_sha256": "8b8768010108a8cd186a562e6e2778bae4586ccd72088b5a99e28cebd5a617b3",
+      "rows_sha256": "2af83f5fd7ac399b266a0745f7eb26a2c077e5fade7c270cda4c7e6f615b54aa",
+      "session_id": "b471bcade6e949e28506d8ed6e6d95f8"
+    },
+    "youtube-dev-02": {
+      "summary_sha256": "baa7a1995493ba584791cb65b696cabd01c87a8e3b42428c667c3e95f40d0ba1",
+      "rows_sha256": "14a1d0d2e501e931357f3dc507fd7bbf588ab4270b60a01b03153d3062435130",
+      "session_id": "2b264585351543108cf289b28107abde"
+    },
+    "instagram-dev-03": {
+      "summary_sha256": "94853d3d6c439933f3687758a3b6ad04fed519d8bb466db59d8992cf5484abba",
+      "rows_sha256": "074f68da141d7593c3ed0557709de3d85df50ac0fcad7eeb5d5da9dde4741f9b",
+      "session_id": "b16f1670ff9042a58d0708cda3bc72e0"
+    },
+    "instagram-dev-04": {
+      "summary_sha256": "3b017210fa266711426b6324ef38aa56b5f7ad33ceecc0c068feeeb420ddae63",
+      "rows_sha256": "9b28b13f6e17c47acb55617ceb145d5d9f3ba77221e31105bbe673a870d91ce8",
+      "session_id": "8e268de57671473e85bef7df59324a87"
+    },
+    "instagram-dev-05": {
+      "summary_sha256": "9969db750045f30664f8d904648d23c2c887a05c12e70bceff410df56042bcd7",
+      "rows_sha256": "a456105e94e0b3baacc51db10573fba72007615ccc7a44c4652cccfe3b484335",
+      "session_id": "7f8aa34810a84d0e9cfa370aaae5e2ca"
+    },
+    "youtube-dev-03": {
+      "summary_sha256": "06adcecf9f793675d93ce4069cb212cd35eca71fc96ac3531bf6bcb76635456d",
+      "rows_sha256": "fa5d0aa2232e9fe07255b383054e7076d8044be1a8fdece4740d2d0f0761bdfc",
+      "session_id": "7192ba2ba2da4e509382b7d796733b89"
+    },
+    "instagram-dev-06": {
+      "summary_sha256": "cab17786304cde1682b741688e4c07bc6e52c50370d72567d1a8b60675ce1318",
+      "rows_sha256": "76ae6f066090c57b2a9a819c5d4585ebbb5d2e229f693bbff714add8a4fbcd7a",
+      "session_id": "814db3cae98c46eeaa360ee503f1751f"
+    },
+    "youtube-dev-04": {
+      "summary_sha256": "ebd5e962534fa933fb96e5a6d464ef074661eab8f65a3dd356d9d6baa820266f",
+      "rows_sha256": "005fa22c4cebc3b4ca85a824ad13b10d715989d9bc39d87928c0c79dfdeebbd4",
+      "session_id": "4b9ff2c9ce8a453eb4848e4ca35f7083"
+    },
+    "youtube-dev-05": {
+      "summary_sha256": "fdee6b7d80e3b43a3bd581c7aefe364426ba9a88ee0e6178815736bed814add3",
+      "rows_sha256": "86a95efba815656e9e698c7a0e452e76a51e5e822c13957f0e4974e008946e48",
+      "session_id": "eb34135d99944b00875a88fd52eb34b7"
+    }
+  },
+  "references": {
+    "b17": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/baseline.json",
+      "sha256": "055b046e882f91178aa23ad0791ebe5347b90aa6d0c9b7394d2d4726a97a00f6"
+    },
+    "previous_forest": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/previous-candidate.json",
+      "sha256": "573bd8878eb1dd2bfaf8059f63b332c9c6042f4b73a4e0490a7789e4496e6eb2"
+    },
+    "recent_forest": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/development.json",
+      "sha256": "c4c804283f994b21c667d7fdd28baeed88119854c08b11b80bab4ce82990ee67"
+    },
+    "b17_predictions": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/baseline-predictions.json",
+      "sha256": "012919f893d65e4e9db84fd110f31d7b0fce4bd64163bbe03809b2d08195b357"
+    },
+    "previous_forest_predictions": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/previous-candidate-predictions.json",
+      "sha256": "b7675a19027e41b3a4a0ba89ed46021178ff26af5ac7a3f6969f82e73adb806d"
+    },
+    "recent_forest_predictions": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/predictions.json",
+      "sha256": "917658a9b0ff8de5232ba45b602118223018051f329b441589e81a79eb5f0545"
+    }
+  }
+}

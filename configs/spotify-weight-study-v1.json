@@ -1,0 +1,52 @@
+{
+  "version": "spotify-weight-study-v1",
+  "declared_utc": "2026-11-08T17:27:26.377Z",
+  "previous_plan": "configs/spotify-data-repair-v1.json",
+  "previous_root": "artifacts/local/spotify-data-repair-v1",
+  "previous_failed_decision": "experiments/spotify-data-repair-v1/development/decision.json",
+  "previous_failed_decision_sha256": "12643618187ce9b4685e0a3017e8ca4fd92a73aa2feb47fef2c7ead217b6d2d7",
+  "previous_training_manifest_sha256": "97007f32673c1bcbc262cc1a237bdc8c629dc232658a6b4b951fc9620db39b4d",
+  "output": "experiments/spotify-weight-study-v1",
+  "seed": 17,
+  "threads": 2,
+  "forest": {
+    "n_estimators": 32,
+    "max_depth": 12,
+    "min_samples_leaf": 2
+  },
+  "feature_map": "summary-v1",
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "public_mass": 0.75,
+  "arms": [
+    {
+      "name": "spotify-001",
+      "spotify_mass": 0.01
+    },
+    {
+      "name": "spotify-0025",
+      "spotify_mass": 0.025
+    },
+    {
+      "name": "spotify-005",
+      "spotify_mass": 0.05
+    }
+  ],
+  "maximum_new_fits": 3,
+  "development_gates": {
+    "spotify_min_raw_recall_each_10_20_30": 0.6,
+    "spotify_min_primary_correct_gain": 1,
+    "local_no_macro_f1_loss": true,
+    "local_YT_IG_no_recall_loss_each_prefix": true,
+    "public_max_macro_f1_loss_each_prefix": 0.02,
+    "public_max_class_recall_loss_each_prefix": 0.05,
+    "all_required": true
+  },
+  "selection_rule": "Only candidates passing all six inherited gates. Rank by highest minimum Spotify recall at 10/20/30, then highest ten-packet correct count, then lowest Spotify training mass. If none pass, stop without another fit.",
+  "data_roles": "Same 14000 public training, 62 existing local YT/IG and 17 new role=train Spotify flows. Existing spotify-dev-01 stays selection only, never training; original 17 local YT/IG and first50 public selection/class are reused retention. Original diagnostic, calibration, final and other capture scopes are excluded.",
+  "limits": "Offline development-only follow-up authorized after the prior failed study. Three fixed lower-weight candidates, same seed/model/feature semantics, no augmentation, no new recording, no transferred confidence, no calibration, deployment or promotion. Old failure remains immutable. Reused exposed selection can overfit: any selected candidate requires a separately frozen fresh verification/calibration protocol before use. No broad accuracy or causality claim. A failed scope stops without weight-grid expansion."
+}

@@ -1,0 +1,83 @@
+{
+  "version": "forest-policy-calibration-v1",
+  "declared_utc": "2026-11-01T12:48:14.978535+00:00",
+  "purpose": "Fixed forest decision-policy calibration, then one untouched final pair; no training or automatic deployment",
+  "source_bundle": "experiments/full-real/20261024-151720-3532794c/bundle",
+  "source_artifact_id": "18c43fe12262b81d4a3001df150a278865f3908ddd3aab934822fc0c9e5750fb",
+  "interface": "9",
+  "offset_minutes": 330,
+  "trials": [
+    {
+      "id": "forest-cal-ig-01",
+      "target": "instagram",
+      "day": 1,
+      "role": "calibration",
+      "activity": "Scroll feed for 30 seconds, then watch different Reels for 30 seconds."
+    },
+    {
+      "id": "forest-cal-yt-01",
+      "target": "youtube",
+      "day": 1,
+      "role": "calibration",
+      "activity": "Open a different YouTube video and watch for 60 seconds."
+    },
+    {
+      "id": "forest-eval-yt-01",
+      "target": "youtube",
+      "day": 2,
+      "role": "final",
+      "activity": "On a later date after policy freeze, watch a different video for 60 seconds."
+    },
+    {
+      "id": "forest-eval-ig-01",
+      "target": "instagram",
+      "day": 2,
+      "role": "final",
+      "activity": "On that same final date, scroll feed for 30 seconds and watch different Reels for 30 seconds."
+    }
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "budgets": [
+    10,
+    20,
+    30
+  ],
+  "minimum_target_at_10_per_trial": 3,
+  "minimum_target_at_30_per_trial": 1,
+  "eligibility": "mapped-valid-prefix-v1; all supported mapped flows retained; ambiguous/unmapped inventory preserved; no prediction-based exclusion",
+  "primary": "Accepted error/coverage per class and overall on available10/20/30 prefixes, with separate10-packet class support. Correlated points, no population guarantee.",
+  "diagnostic_pass": "Same frozen empirical error/coverage/support constraints at calibration and final; public control only at calibration. No threshold changes after final.",
+  "collection": "Normal Chrome and Edge app visible; Wi-Fi; reference checkbox on; longer-window statistics off; Strip private information NetLog, sensitive/raw bytes off; cap 120 seconds. User starts both logs before fresh target navigation.",
+  "attempts": "Exactly two calibration visits. If no threshold passes, stop: no final visits, extra recordings, threshold/gate relaxation or model retuning. If feasible, freeze policy bundle before two later-date final visits. One attempt per slot; unusable attempt stops workflow.",
+  "scoring": "Calibration may read only its two new archives and historical public calibration split. No prior local study, old calibration or public final-test rows. Final only after policy freeze and both final archives, no fitting or threshold changes.",
+  "limits": "Decision-policy calibration is empirical threshold selection, not a probability-of-correctness guarantee. Local evidence covers two services; retrospective public control is not forward local validation. Completed comparison remains sealed. No automatic model activation.",
+  "workflow": "calibrate_then_final",
+  "candidate": {
+    "bundle": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle",
+    "metadata": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle/metadata.json",
+      "sha256": "bd79923fabc4816cc2f15b4f150a5d3b428663c455d0fde3da6ab219eb666d62"
+    }
+  },
+  "candidate_weight_sha256": "fc735ea2f5e821bfba3832a588bdb3e62fde7a0c8f47c55567cb4cd5a2ee0494",
+  "public_manifest_sha256": "46ef59ce749e8c3da1d7bde4597e1e9697a7e97a046f01a48af0ec5f0612eae3",
+  "policy_rules": {
+    "budgets": [
+      10,
+      20,
+      30
+    ],
+    "min_packets": 10,
+    "temperature": 1.0,
+    "thresholds": "0.00..1.00 step0.01; choose lowest eligible threshold, maximum monotone coverage",
+    "maximum_empirical_error": 0.1,
+    "minimum_coverage": 0.5,
+    "minimum_accepted_primary_per_class": 3,
+    "minimum_accepted_public_overall": 30,
+    "minimum_accepted_public_per_class": 5,
+    "public_flows_per_class": 50
+  }
+}

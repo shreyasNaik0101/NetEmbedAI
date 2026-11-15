@@ -1,0 +1,33 @@
+{
+  "version": "spotify-ten-packet-v1",
+  "declared_utc": "2026-11-08T18:14:38.287Z",
+  "source_bundle": "experiments/spotify-weight-study-v1/spotify-001/bundle",
+  "source_artifact_id": "eddce5a1bcbcc80ec43b4b9b89b642827e74df7fde2f08a0cc81db2756f7b613",
+  "source_weights_sha256": "b5a312fe86850a93fdc1c7b74cbfb6ffa58009e781888bafa5e47062e6f42adf",
+  "prior_decision": "experiments/spotify-weight-study-v1/decision.json",
+  "prior_decision_sha256": "d8a640a18f6c73a4f6cc5e89a17ea18915ab1b33b23792f897705a3bd1adf857",
+  "previous_plan": "configs/spotify-data-repair-v1.json",
+  "previous_root": "artifacts/local/spotify-data-repair-v1",
+  "recipe": "configs/ipv6-realdata-pilot-v1.json",
+  "output": "experiments/spotify-ten-packet-v1",
+  "feature_map": "summary-v1",
+  "model_packets": 10,
+  "new_fits": 0,
+  "threads": 2,
+  "public_selection_per_class": 50,
+  "gates": {
+    "spotify_min_recall": 0.6,
+    "spotify_min_correct_gain": 1,
+    "local_no_macro_f1_loss": true,
+    "local_no_class_recall_loss": true,
+    "public_max_macro_f1_loss": 0.02,
+    "public_max_class_recall_loss": 0.05
+  },
+  "cpu": {
+    "warmup": 50,
+    "calls": 500
+  },
+  "limits": "Post-hoc narrower ten-packet development task, motivated by already exposed results. Reuse the fixed 1% candidate weights unchanged; no refit, weight/threshold search, new recording, calibration, activation or promotion. Both control/candidate evaluated using exactly ten packets, same 4 Spotify/17 retained local/452 eligible historical public selection cases (48 short flows inventoried separately). All previous multi-prefix failures stay failed. Short flows produce no scores; later packets are metadata and never extra classification evidence. Scores are uncalibrated; even passing reused development requires a separate frozen fresh verification/calibration protocol before live use.",
+  "public_cohort": "The previously frozen first50 selection flows/class (500 total), excluding the 48 with fewer than ten packets, without replacement; exactly452 eligible. Excluded IDs/lengths retained in manifest. Same eligible IDs for both models.",
+  "preflight_correction": "Before mode export or assessment, saved observed lengths revealed48 public flows shorter than10. Corrected the initial500-case wording to452exact-ten-packet cases; no outcomes or gates changed."
+}

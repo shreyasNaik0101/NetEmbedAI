@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "kind": "prospective_selection_followup_protocol",
+  "status": "planned_not_prepared",
+  "created_utc": "2026-10-30T13:58:55.171787+00:00",
+  "reason": "User requested a follow-up plan after the frozen six-recording study stopped one independently verified YouTube selection connection below its required count. No candidate fitting occurred.",
+  "parent_plan": {
+    "path": "configs/browser-collection-v3.json",
+    "sha256": "330597baa5fc8e5973c87eade6cbb06b86d2e73109b5756aa8b4157252735d59",
+    "state": "closed_with_support_shortfall; preserve original bytes and all evidence"
+  },
+  "parent_evidence": {
+    "instagram-dev-01": {
+      "role": "train",
+      "collection_summary_sha256": "2cc5b949345df0592558cc79b666ace3b515ab25241ba5e6b65f59ea3333660e",
+      "packet_rows_sha256": "5d5c02f9ff74034e575b44efc2a7f7cb54f049fd78acbd3cbb95a322f57fae3b"
+    },
+    "youtube-dev-01": {
+      "role": "train",
+      "collection_summary_sha256": "bc42b72dfeeb68bac92dcf15736f11652e1a73e9be989395135e00cacd4dcc71",
+      "packet_rows_sha256": "c4b95e65cb3f1a81061404b998426d0c606840347d957bb0a67a2350fb6eb84b"
+    },
+    "instagram-dev-02": {
+      "role": "train",
+      "collection_summary_sha256": "8b8768010108a8cd186a562e6e2778bae4586ccd72088b5a99e28cebd5a617b3",
+      "packet_rows_sha256": "2af83f5fd7ac399b266a0745f7eb26a2c077e5fade7c270cda4c7e6f615b54aa"
+    },
+    "youtube-dev-02": {
+      "role": "train",
+      "collection_summary_sha256": "baa7a1995493ba584791cb65b696cabd01c87a8e3b42428c667c3e95f40d0ba1",
+      "packet_rows_sha256": "14a1d0d2e501e931357f3dc507fd7bbf588ab4270b60a01b03153d3062435130"
+    },
+    "instagram-dev-03": {
+      "role": "train",
+      "collection_summary_sha256": "94853d3d6c439933f3687758a3b6ad04fed519d8bb466db59d8992cf5484abba",
+      "packet_rows_sha256": "074f68da141d7593c3ed0557709de3d85df50ac0fcad7eeb5d5da9dde4741f9b"
+    },
+    "instagram-dev-04": {
+      "role": "train",
+      "collection_summary_sha256": "3b017210fa266711426b6324ef38aa56b5f7ad33ceecc0c068feeeb420ddae63",
+      "packet_rows_sha256": "9b28b13f6e17c47acb55617ceb145d5d9f3ba77221e31105bbe673a870d91ce8"
+    },
+    "instagram-dev-05": {
+      "role": "train",
+      "collection_summary_sha256": "9969db750045f30664f8d904648d23c2c887a05c12e70bceff410df56042bcd7",
+      "packet_rows_sha256": "a456105e94e0b3baacc51db10573fba72007615ccc7a44c4652cccfe3b484335"
+    },
+    "youtube-dev-03": {
+      "role": "train",
+      "collection_summary_sha256": "06adcecf9f793675d93ce4069cb212cd35eca71fc96ac3531bf6bcb76635456d",
+      "packet_rows_sha256": "fa5d0aa2232e9fe07255b383054e7076d8044be1a8fdece4740d2d0f0761bdfc"
+    },
+    "instagram-dev-06": {
+      "role": "selection",
+      "collection_summary_sha256": "cab17786304cde1682b741688e4c07bc6e52c50370d72567d1a8b60675ce1318",
+      "packet_rows_sha256": "76ae6f066090c57b2a9a819c5d4585ebbb5d2e229f693bbff714add8a4fbcd7a"
+    },
+    "youtube-dev-04": {
+      "role": "selection",
+      "collection_summary_sha256": "ebd5e962534fa933fb96e5a6d464ef074661eab8f65a3dd356d9d6baa820266f",
+      "packet_rows_sha256": "005fa22c4cebc3b4ca85a824ad13b10d715989d9bc39d87928c0c79dfdeebbd4"
+    }
+  },
+  "counts_at_declaration": {
+    "train": {
+      "instagram": 22,
+      "youtube": 21
+    },
+    "selection": {
+      "instagram": 7,
+      "youtube": 5
+    }
+  },
+  "parent_runner_configs": {
+    "configs/browser-expanded-v3-seed17.json": "b54a85b1570fe4f3f26a3b478787b83f91ae7cf8270818c6fc379926e2ebde1c",
+    "configs/browser-expanded-v3-seed42.json": "b450fa1f5797a0c2143f194dcc3543afe38da2cd950dfe65d89b4555c554333c",
+    "configs/browser-expanded-v3-seed123.json": "933da304b108c46161f2ec4d79adc3a1886ffaa2860a6f186fce2b7184e15460"
+  },
+  "one_additional_trial": {
+    "id": "youtube-dev-05",
+    "role": "selection",
+    "maximum_user_started_sessions": 1,
+    "activity_seconds": 60,
+    "capture_duration_cap_seconds": 120,
+    "activity": "Open a different YouTube video after Start and watch for 60 seconds in normal Chrome. Keep NetEmbedAI in Edge visible beside it.",
+    "normal_chrome_fresh_start": "Save browser work, exit Chrome, reopen without restoring YouTube pages before capture; open net-export first. Never change protocol flags or use a private window.",
+    "netlog_filename": "youtube-dev-05-netlog.json",
+    "netlog_privacy": "Strip private information; sensitive/raw bytes off",
+    "interface_id": "9",
+    "interface_name": "Wi-Fi",
+    "separate_handshake_reference": true,
+    "longer_window_statistics": false,
+    "capture_must_be_user_started": true,
+    "allow_automatic_capture": false
+  },
+  "source_artifact_id": "18c43fe12262b81d4a3001df150a278865f3908ddd3aab934822fc0c9e5750fb",
+  "new_train_trials": [
+    "instagram-dev-01",
+    "youtube-dev-01",
+    "instagram-dev-02",
+    "youtube-dev-02",
+    "instagram-dev-03",
+    "instagram-dev-04",
+    "instagram-dev-05",
+    "youtube-dev-03"
+  ],
+  "new_selection_trials": [
+    "instagram-dev-06",
+    "youtube-dev-04",
+    "youtube-dev-05"
+  ],
+  "retain_every_eligible_connection": true,
+  "eligibility": "mapped-valid-prefix-v1",
+  "minimum_training_connections": {
+    "instagram": 20,
+    "youtube": 12
+  },
+  "minimum_selection_connections": {
+    "instagram": 6,
+    "youtube": 6
+  },
+  "minimum_selection_full_prefix_connections": {
+    "instagram": 3,
+    "youtube": 3
+  },
+  "selection_gap_minutes_after_latest_retained_training_packet": 60,
+  "new_trial_must_follow_latest_retained_parent_selection_packet": true,
+  "protected_trial_ids": [
+    "instagram-cal-01",
+    "youtube-cal-01",
+    "instagram-cal-02",
+    "youtube-cal-02"
+  ],
+  "reserved_future_calibration": [
+    "instagram-cal-03",
+    "youtube-cal-03"
+  ],
+  "reserved_future_final": [
+    "instagram-eval-01",
+    "youtube-eval-01"
+  ],
+  "model_protocol": {
+    "inherit_numeric_settings_and_feature_contracts_from_parent_configs": true,
+    "families": [
+      "existing compact CE TCN",
+      "same-data summary forest"
+    ],
+    "seeds_in_order": [
+      17,
+      42,
+      123
+    ],
+    "threads": 2,
+    "epochs_per_seed": 5,
+    "steps_per_epoch": 50,
+    "batch_size": 64,
+    "local_training_mass_fraction": 0.25,
+    "new_architectures_or_feature_sweeps": false,
+    "normalizer": "Original public-training-only saved normalizer; no refitting on selection",
+    "seed17_stop_if_no_candidate_eligible": true,
+    "quality_gate_mean_budget_macro_f1_minimum": 0.75,
+    "mean_budget_recall_per_local_service_minimum": 0.65,
+    "gain_over_paired_previous_forest_minimum": 0.01,
+    "recall_regression_allowed": false,
+    "public_clean_retention_loss_vs_B17_maximum": 0.02,
+    "simpler_model_rule": "Prefer eligible forest within 0.01 local score if measured CPU p50 is no worse.",
+    "seed_selection": "Choose the family/checkpoint using frozen seed-17 rules. Report fixed-seed repetitions; never replace seed17 with the best seed.",
+    "repetition_stability_gate": "If the chosen seed17 family fails the unchanged eligibility guard in either seed42 or seed123, stop before calibration. No switching families or choosing another seed after that failure.",
+    "candidate_policy": "Uncalibrated and uncommitted; no default switch"
+  },
+  "output_directories": {
+    "17": "experiments/browser-adaptation/selection-followup-v1-seed17",
+    "42": "experiments/browser-adaptation/selection-followup-v1-seed42",
+    "123": "experiments/browser-adaptation/selection-followup-v1-seed123"
+  },
+  "stop_rules": [
+    "After the single additional user-started session, archive regardless of outcome. If unusable or pooled YouTube support remains below six, stop without further capture or fitting.",
+    "Do not include only the first needed connection, discard wrong predictions, relax matching, or relabel ambiguous/unsupported flows.",
+    "If seed17 has no eligible model, stop seed repetitions and calibration.",
+    "Do not tune on protected calibration/final recordings or use this enlarged development cohort as independent final evidence.",
+    "Calibration and final live evaluation remain separately planned stages; this one-session scope does not request those captures."
+  ],
+  "required_tooling_before_capture": [
+    "Add explicit follow-up-plan support with parent per-trial plan and checksum bindings; existing v3 reader must keep rejecting extra trials.",
+    "Write a new pre-capture intent for youtube-dev-05; existing v3 intents and summaries must not be rewritten.",
+    "Test inherited-role/checksum rejection, one-session limit, chronology and support gates, and no capture side effects.",
+    "Generate new runner configs with only declared cohort/provenance/output-description changes; compare numeric training/selection settings to the bound originals."
+  ],
+  "execution_note": "This is a protocol specification, not an input accepted by collect_browser.py or adapt_browser.py today. No follow-up intent exists, no capture is prepared, and no new run is launched by creating this file.",
+  "evidence_limits": "Counts are engineering coverage requirements, not independent population sample sizes. The follow-up is declared after seeing parent development diagnostics; it cannot establish blind final accuracy. This capture cannot guarantee a valid new QUIC connection or a better classifier."
+}

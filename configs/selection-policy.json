@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "seeds": [
+    17,
+    42,
+    123
+  ],
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "default_candidate": "cross-entropy without augmentation",
+  "score": "Mean macro-F1 across all four budgets and clean plus three fixed stresses",
+  "supcon_rule": "D exceeds B in all 3 paired seeds; mean gain >=0.01; clean loss <=0.01",
+  "classical_rule": "Prefer forest if score within 0.01 and measured CPU latency no worse",
+  "clean_floor": 0.8403663777292364,
+  "clean_floor_basis": "Seed-17 A selected checkpoint (epoch 16), development clean mean 0.8503663777292364 minus 0.01; artifact 2fea3f56ef28ba4b852226fffc9866384c673ecaa3bdc9d1d1e9bc70470413f2",
+  "augmentation_policy": "single-edit-50-clean-v1: 3/6 clean, 1/6 each timing, abstract padding, observation loss; deterministic per flow/epoch/seed and shared by B/D",
+  "status": "three-seed comparison complete; decision frozen in configs/default-decision.json before final test"
+}

@@ -1,0 +1,73 @@
+{
+  "reference_bundle": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle",
+  "reference_id": "bd79923fabc4816cc2f15b4f150a5d3b428663c455d0fde3da6ab219eb666d62",
+  "reference_weight_sha256": "fc735ea2f5e821bfba3832a588bdb3e62fde7a0c8f47c55567cb4cd5a2ee0494",
+  "public_data": "data/processed/v2",
+  "public_manifest_sha256": "46ef59ce749e8c3da1d7bde4597e1e9697a7e97a046f01a48af0ec5f0612eae3",
+  "local_root": "artifacts/local/browser-development",
+  "train_trials": [
+    "instagram-dev-01",
+    "youtube-dev-01",
+    "instagram-dev-02",
+    "youtube-dev-02",
+    "instagram-dev-03",
+    "instagram-dev-04",
+    "instagram-dev-05",
+    "youtube-dev-03"
+  ],
+  "selection_trials": [
+    "instagram-dev-06",
+    "youtube-dev-04",
+    "youtube-dev-05"
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "public_selection_per_class": 50,
+  "forest": {
+    "n_estimators": 32,
+    "max_depth": 12,
+    "min_samples_leaf": 2
+  },
+  "threads": 2,
+  "version": "ipv6-realdata-pilot-v1",
+  "declared_utc": "2026-11-05T12:54:00+00:00",
+  "seed": 17,
+  "local_training_mass": 0.25,
+  "new_training_root": "artifacts/local/hotspot-fresh-sessions-v1",
+  "new_collection_plan": "configs/hotspot-fresh-sessions-v1.json",
+  "new_training_archives": {
+    "fresh-yt-01": "9c6c2513496a52fe7ebe4f82a9fd3b7dc25c0ff6472d90adc15af67f33002cde",
+    "fresh-ig-01": "c85084c79e8ec4df4c90ba9505304d7a3c8c8bbd9b2e6ac8ebc92812fc0bab37",
+    "fresh-yt-02": "e6dfe59c84147e49d924975be625770c5b04e59d2bc00d64c2e013b8cc7792a6"
+  },
+  "expected_new_counts": {
+    "youtube": 15,
+    "instagram": 4
+  },
+  "family_audit_root": "experiments/family-coverage-audit-v1",
+  "family_audit_sha256": "ac3bdef530ce2655ea7b65ce8f7809f19950d35704af47580e7e63508717987b",
+  "arms": [
+    "control",
+    "plus-real-ipv6"
+  ],
+  "feature_map": "summary-v1",
+  "augmentation": null,
+  "gates": {
+    "minimum_local_clean_f1": 0.75,
+    "minimum_local_f1_gain": 0.01,
+    "local_class_no_recall_loss": true,
+    "maximum_public_f1_loss": 0.02,
+    "maximum_public_class_recall_loss": 0.05
+  },
+  "selection": "One seed17 pair only. Require byte-identical original control weights before candidate fitting. Positive screen requires every gate. No retry, extra treatment, seed sweep, calibrated policy or deployment. No further recording requested by this pilot.",
+  "weighting": "75% public/25% local, local classes equally weighted, original per-flow weights and four equally weighted prefix views. Old43 retained; add all19 eligible new flows. No session reweighting sweep.",
+  "limits": "Explicit training-only adoption of exactly three usable acquisition archives; original six-visit scope is incomplete and paused, not relabelled complete. Prior failed campus/hotspot/calibration/comparison/diagnostic rows excluded. Old43 local training and17 existing selection connections retain roles. New training is later than reused selection: retrospective exploratory development only, not chronological forward evidence. Public first50 selection/class is retention only. No public calibration/final or remaining three acquisition slots. No new captures, model activation or quality guarantee. Family metadata only for reporting, never predictor input. New data plus changed per-class sample/bootstraps is a pipeline intervention, not isolated IP-family causality."
+}

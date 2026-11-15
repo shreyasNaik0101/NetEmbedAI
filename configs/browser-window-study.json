@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "purpose": "one browser-observer diagnostic of longer windows using existing legacy development logs; not live-capture accuracy",
+  "observer": "browser_udp_socket",
+  "reference_config": "configs/browser-forward-mass25.json",
+  "labels": ["youtube", "instagram"],
+  "horizons_ms": [1000, 3000],
+  "feature_version": "bounded-window-features-v1",
+  "forest": {"n_estimators": 32, "max_depth": 12, "min_samples_leaf": 2, "class_weight": "balanced", "random_state": 17, "n_jobs": 2},
+  "minimum_train_per_class": 3,
+  "minimum_selection_per_class": 2,
+  "eligibility": "existing independently mapped/QC-valid row; unique complete UDP socket, first-transfer/capture anchor <=100ms; exactly one valid QUIC session on token in [-2s,+3s]; global retained log event coverage through+3s; >=5 socket datagrams; keep all exclusions",
+  "matched_control": "same retained connections/labels/groups, local-only first30-packet summary forest from the SAME browser UDP observer; secondary capture-prefix control measures observation-point difference. Same parameters/class weighting; neither is the earlier public+local10-class forest. Prefix duration varies; windows have fixed temporal budgets.",
+  "window_features": "12 fixed scalar descriptors and60 directional100ms packet-mass bins; no labels, origins, IDs, whole-flow totals or future packets; no learned preprocessing",
+  "decision": {"minimum_f1_gain_over_matched_prefix": 0.01, "per_class_recall_nonregression": true},
+  "benchmark_calls": 1000,
+  "benchmark_warmup": 50,
+  "stop": "one fixed seed/representation; no horizon/parameter/threshold search or promotion; protect cal02/new development/final/unscored window-engineering trial; browser results cannot validate TShark observer transfer or all10 services"
+}

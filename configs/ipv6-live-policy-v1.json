@@ -1,0 +1,74 @@
+{
+  "version": "ipv6-live-policy-v1",
+  "declared_utc": "2026-11-06T14:53:53.930Z",
+  "workflow": "live_policy_validation",
+  "scope": "fresh_evaluation_only",
+  "purpose": "Exactly two new user-started visits on the unchanged public-policy forest, measuring actual emitted decisions and browser receipt latency. No fitting, replacements or automatic capture.",
+  "source_bundle": "experiments/ipv6-public-policy-v1/bundle",
+  "source_artifact_id": "9878d0818370ede3e9897a9cc654b4ddc0afcd87d41b2d7134ccaf52592b528a",
+  "source_weight_sha256": "78efcee31f1ce49a882283b8d4a585bfbc9c0980e40ace68587a98b811d5eecb",
+  "expected_policy": {
+    "version": "cesnet-forest-refusal-v1",
+    "fitted": true,
+    "threshold": 0.76,
+    "min_packets": 10,
+    "temperature": 1,
+    "tie_break": "label_order",
+    "validation_scope": "cesnet_calibration_only",
+    "locally_checked_labels": [],
+    "note": "Refusal threshold fitted only on historical CESNET calibration, not local traffic. Scores are not calibrated correctness probabilities; no unknown-service guarantee."
+  },
+  "service_url": "http://127.0.0.1:8002",
+  "interface": "9",
+  "offset_minutes": 330,
+  "threads": 2,
+  "network_context": {
+    "type": "same_user_declared_mobile_hotspot",
+    "connectivity_report": "experiments/ipv6-live-policy-preflight-v1/report.json",
+    "connectivity_report_sha256": "18cedefcda5f5565b4a049abc05316024a63d41429f0be38b844a242f77a1128",
+    "limits": "Current dual-family TCP reachability checked; hotspot identity user-declared, no campus transfer claim."
+  },
+  "browser_session_policy": "All Chrome processes closed before each intent; reopen normal Chrome after intent. Start stripped NetLog, then app capture, then fresh target navigation. Stop both; keep Chrome open until archive verifies process lifetimes.",
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "minimum_target_at_10_per_trial": 1,
+  "minimum_target_at_30_per_trial": 1,
+  "minimum_complete_target_ipv6": 1,
+  "expanded_netlog_required": true,
+  "eligibility": "Existing mapped-valid-prefix packet/socket/reference QC. Retain all eligible supported flows and refusal inventories, independent of model output. One complete target IPv6 flow per visit.",
+  "collection": "Temporary validation app8002, Wi-Fi9, reference ON, longer windows OFF. Edge viewer plus normal Chrome stripped NetLog/target; close other Chrome tabs. Target activity60s, capture limit120s. No deliberate background load; incidental traffic preserved. Model/policy fixed before packets arrive.",
+  "primary": "Actual emitted ten-packet decisions on independently referenced target-service flows in their target visits. Denominator is all eligible target flows reaching ten packets; missing emitted checkpoints are separately counted and never filled with replay. Report conditional model acceptance and end-to-end acceptance separately. Full-prefix replay is secondary only.",
+  "rules": {
+    "maximum_empirical_accepted_error": 0.1,
+    "minimum_end_to_end_coverage": 0.5,
+    "minimum_accepted_per_target": 1
+  },
+  "latency": "For all actual native events, report sample counts and p50/p95 capture-to-parser, queue, prediction pipeline, capture-to-event and capture-to-browser-receipt separately. Browser receipt is not paint. No numeric hard-latency pass target; require nonempty backend and browser receipt samples plus no drops/evidence eviction for operational screen.",
+  "scoring": "Only after both usable archives. Verify source replay matches emitted native labels/scores. No calibration, training, policy changes, old study inputs or public data. Preserve both a raw/probability replay diagnostic and actual-live-only acceptance metrics.",
+  "attempts": "One YouTube then one Instagram visit on the same local date after declaration; one attempt per slot. Genuine QC/support failure stops scope; processor failures preserve same attempt. No replacement or extra recording. Stop this scope on failed quality/operational screen without retuning.",
+  "limits": "Small two-service same-hotspot prospective operational/policy check, not population accuracy, correctness probability, open-world detection or hard real-time guarantee. Existing four-visit evaluation stays sealed. Temporary preview does not replace the normal B17 startup default. User alone presses Start.",
+  "trials": [
+    {
+      "id": "live-yt-01",
+      "target": "youtube",
+      "role": "live_policy_evaluation",
+      "day": 1,
+      "activity": "Fresh normal Chrome. Watch a different YouTube video for60 seconds."
+    },
+    {
+      "id": "live-ig-01",
+      "target": "instagram",
+      "role": "live_policy_evaluation",
+      "day": 1,
+      "activity": "Fresh normal Chrome. Scroll feed30 seconds, then different Reels30 seconds."
+    }
+  ]
+}

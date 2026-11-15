@@ -1,0 +1,36 @@
+{
+  "version": "prefix-linear-probe-v1",
+  "parent_config": "configs/pool-linear-probe-v1.json",
+  "purpose": "One four-head specialization experiment using the same frozen encoder, scaler, rows, weights and solver; no collection or promotion",
+  "shared_bundle": "experiments/browser-adaptation/pool-linear-probe-v1/bundle",
+  "shared_metadata": {
+    "path": "experiments/browser-adaptation/pool-linear-probe-v1/bundle/metadata.json",
+    "sha256": "b2fe68875f11b507f156aedae7c9300bdb8ee3f65db17a43f22b96c45b2bf5d6"
+  },
+  "shared_report": {
+    "path": "experiments/browser-adaptation/pool-linear-probe-v1/report.json",
+    "sha256": "ee3d7927dc422c932ff36badf57dbf8ab9b5a0fbf6c2cd7dab5439c8bcef90e3"
+  },
+  "shared_predictions": {
+    "path": "experiments/browser-adaptation/pool-linear-probe-v1/local-predictions.json",
+    "sha256": "a221017bce84833060e31b5a2ef4f463a34151d6bd803bf6af3c84c7bc2eee22"
+  },
+  "shared_protocol": {
+    "path": "experiments/browser-adaptation/pool-linear-probe-v1/protocol.json",
+    "sha256": "f19ada05a9612cd44d1ffc53c094da594dde93cf3b18bef87da50723a4946aa8"
+  },
+  "heads": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "scaling": "Reuse exactly the shared probe training-only weighted scaler; no fitting on development or per-prefix rescaling",
+  "training_mass": "Same per-row mass as shared study: each prefix gets one quarter of each flow weight, summing to 14043/4 per head. C=1 unchanged for each head.",
+  "routing": "Study supplies explicit requested checkpoint; input must have <= checkpoint packets. Default standalone routing chooses smallest checkpoint >= actual length. No future packet access; no claim for intermediate lengths.",
+  "evaluation": "All four heads fit and full bundle saved before development scoring. Score every available local checkpoint; public short flows use the requested head with actual min(length,budget) prefix, matching training.",
+  "quality_gates": "Original five forest/B17 checks unchanged. Also require no shared-head mean F1 or per-service mean-recall regression and five-packet local F1 gain >=0.01 over the shared head.",
+  "early_f1_gain_minimum": 0.01,
+  "stopping": "One fixed set of four heads. Stop on any nonconvergence; never replace a failed head with the shared model, mix winners by development result, retune C, refit scaler or add seeds. No calibration/new capture/default promotion even if screen passes; independent protocol required.",
+  "limits": "Exploratory hypothesis chosen after inspecting reused selection errors. No untouched evaluation or causal live-performance claim. More head parameters and separate L2 penalties are explicit differences."
+}

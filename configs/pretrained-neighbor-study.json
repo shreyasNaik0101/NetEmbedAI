@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "purpose": "one isolated frozen official encoder plus cosine1-NN; exploratory development, no promotion",
+  "encoder": "30pktTCNET_256",
+  "package_version": "0.4.1",
+  "wheel_sha256": "86acb26e5c1595e2d80546bc44859e3d0daf271a20cbb7fbc829fd513a56154b",
+  "weight_sha256": "dc4b3333388239ac25b8c028c922965e2333cc151dd5fad951950099e86fabc4",
+  "weight_source": "https://liberouter.org/datazoo/download?bucket=cesnet-models&file=30pktTCNET_256_CESNET_QUIC22_Week46_Domains.pth",
+  "pretraining": "upstream week46 domains; old public final test overlaps, never evaluate there; historical week45 control is retrospective, not forward independent evidence",
+  "training": "same14000 public week44 plus17 legacy local references as ordered1-NN; frozen encoder, no tuning, no domain-mass weighting",
+  "representation": "upstream clipping/no-scaling; input batch,3,30; normalized256-dimensional embeddings; actual prefix zero padded",
+  "retrieval": "exact cosine1-NN; smallest checkpoint>=actual input length; stable reference-order ties; similarity is not probability",
+  "budget": [5,10,20,30],
+  "threads": 2,
+  "batch_size": 128,
+  "benchmark_calls": 1000,
+  "benchmark_warmup": 50,
+  "benchmark_input": "experiments/browser-adaptation/pilot-01/benchmark-flow.json",
+  "gates": {"local_f1_comparability_margin": 0.01, "class_recall_nonregression": true},
+  "stop": "one fixed frozen encoder/head; no fine-tune or neighbors sweep; cal02/newer development/future/final data excluded; independent new validation still required"
+}

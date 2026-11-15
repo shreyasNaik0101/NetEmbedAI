@@ -1,0 +1,1 @@
+Archived from clean commit 47a355c5a3757b8c73f932ce3bdbca1efbe34f6d on 2026-10-23. These scripts and stored results use the old readout, split and perturbation protocols. They are historical evidence, not v2 measurements. Imports and commands assume the original repository layout; this archive is not an active installation target. No old weights are accepted as v2 bundles.

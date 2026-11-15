@@ -1,0 +1,155 @@
+{
+  "version": "spotify-data-repair-v1",
+  "workflow": "spotify_data_repair",
+  "scope": "fresh_evaluation_only",
+  "declared_utc": "2026-11-06T19:05:59.678Z",
+  "service_url": "http://127.0.0.1:8002",
+  "source_bundle": "experiments/ipv6-public-policy-v1/bundle",
+  "source_artifact_id": "9878d0818370ede3e9897a9cc654b4ddc0afcd87d41b2d7134ccaf52592b528a",
+  "source_weight_sha256": "78efcee31f1ce49a882283b8d4a585bfbc9c0980e40ace68587a98b811d5eecb",
+  "training_recipe": "configs/ipv6-realdata-pilot-v1.json",
+  "training_recipe_sha256": "0de33a8b63290f34c1055f273a32a9a31443c47dc335dc49d7cc5a9e2fc1f6f2",
+  "interface": "9",
+  "offset_minutes": 330,
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram",
+    "spotify"
+  ],
+  "minimum_target_at_10_per_trial": 3,
+  "minimum_target_at_30_per_trial": 1,
+  "expanded_netlog_required": true,
+  "require_zero_drops": false,
+  "browser_session_policy": "Fully close Chrome before each intent; reopen normal Chrome after preparation. Start stripped NetLog, then app capture, then target navigation. Stop both, keep Chrome open until archive verifies lifetimes. Keep one Edge viewer foreground; never refresh during capture.",
+  "network_context": {
+    "type": "same_user_declared_mobile_hotspot",
+    "limits": "Wi-Fi interface checked before each preparation. Hotspot identity user-declared; no new-network or campus transfer claim."
+  },
+  "trials": [
+    {
+      "id": "spotify-train-01",
+      "target": "spotify",
+      "role": "train",
+      "day": 1,
+      "activity": "Fresh normal Chrome. Open Spotify web player, search a different artist and play a track for 60 seconds."
+    },
+    {
+      "id": "spotify-train-02",
+      "target": "spotify",
+      "role": "train",
+      "day": 1,
+      "activity": "Fresh normal Chrome. Open a different playlist, play then skip to two different tracks across 60 seconds."
+    },
+    {
+      "id": "spotify-train-03",
+      "target": "spotify",
+      "role": "train",
+      "day": 2,
+      "later_date_than": [
+        "spotify-train-01",
+        "spotify-train-02"
+      ],
+      "activity": "On a later local date, fresh normal Chrome; search a different album and play a different track for 60 seconds."
+    },
+    {
+      "id": "spotify-dev-01",
+      "target": "spotify",
+      "role": "selection",
+      "day": 2,
+      "requires_stage": "training",
+      "activity": "After both weights are frozen, fresh normal Chrome; use a different artist/playlist for 60 seconds. Reserved development visit; never training."
+    },
+    {
+      "id": "spotify-cal-01",
+      "target": "spotify",
+      "role": "calibration",
+      "day": 2,
+      "requires_stage": "development",
+      "activity": "Only after development gates pass and uncalibrated candidate is loaded; fresh normal Chrome, different music for 60 seconds. Confidence-policy fitting only."
+    },
+    {
+      "id": "spotify-eval-01",
+      "target": "spotify",
+      "role": "evaluation",
+      "day": 3,
+      "requires_stage": "calibration",
+      "later_date_than": [
+        "spotify-cal-01"
+      ],
+      "activity": "On a later local date than calibration, after fitted policy is frozen and loaded; fresh normal Chrome and previously unused music for 60 seconds. Final evaluation only."
+    }
+  ],
+  "collection": {
+    "maximum_visits": 6,
+    "maximum_attempts_per_slot": 1,
+    "activity_seconds": 60,
+    "capture_cap_seconds": 120,
+    "minimum_training_dates": 2,
+    "minimum_training_target_at_10": 9,
+    "minimum_training_target_at_30": 3,
+    "training_pool": "Only the three new role=train archives plus existing frozen recipe training rows. Original exposed Spotify diagnostic and casual test are excluded.",
+    "quality": "All eligible independently mapped target flows, minimum support independent of prediction. Retained evidence eviction or longer windows fail. Training/selection/calibration may retain counted event/inference drops if target socket-prefix QC passes; these are not clean operational validation. Final evaluation requires zero drops. Unusable slot stops scope; no replacements or outcome-driven extra recordings. Preserve processing failures on the same bound recording."
+  },
+  "training": {
+    "arms": [
+      "control",
+      "plus_spotify"
+    ],
+    "seed": 17,
+    "threads": 2,
+    "forest": {
+      "n_estimators": 32,
+      "max_depth": 12,
+      "min_samples_leaf": 2
+    },
+    "feature_map": "summary-v1",
+    "local_training_mass": 0.25,
+    "weights": "Control unchanged 75% public/25% YT+IG local, must reproduce existing forest weights. Candidate adds all verified new Spotify training flows, retains all old rows, 75% public/25% local equally balanced among YT/IG/Spotify. Data addition and class reweighting are a pipeline intervention, not isolated data causality.",
+    "public_selection_per_class": 50,
+    "policy": "Both new fits remain uncalibrated; never transfer the current fitted policy."
+  },
+  "development_gates": {
+    "spotify_min_raw_recall_each_10_20_30": 0.6,
+    "spotify_min_primary_correct_gain": 1,
+    "local_no_macro_f1_loss": true,
+    "local_YT_IG_no_recall_loss_each_prefix": true,
+    "public_max_macro_f1_loss_each_prefix": 0.02,
+    "public_max_class_recall_loss_each_prefix": 0.05,
+    "all_required": true
+  },
+  "calibration": {
+    "public_first_eligible_per_class": 50,
+    "primary_budget": 10,
+    "budgets": [
+      10,
+      20,
+      30
+    ],
+    "thresholds": "0.00 to 1.00 inclusive step 0.01; choose lowest eligible",
+    "public_max_empirical_error": 0.1,
+    "public_min_coverage": 0.5,
+    "public_min_primary_accepted_per_class": 5,
+    "spotify_min_primary_accepted": 2,
+    "spotify_max_empirical_error": 0,
+    "spotify_min_primary_coverage": 0.5,
+    "all_required": true
+  },
+  "evaluation": {
+    "primary_budget": 10,
+    "min_accepted_spotify": 2,
+    "min_end_to_end_coverage": 0.5,
+    "max_accepted_error": 0,
+    "min_raw_recall": 0.6,
+    "missing_live_checkpoint": "Separate from refusal, never filled with replay",
+    "zero_drops": true,
+    "require_native_prediction_and_browser_receipt_samples": true,
+    "no_automatic_promotion": true
+  },
+  "limits": "Bounded six-visit local Spotify repair, at least two training dates and a later evaluation date. All roles fixed before capture; counts, exclusions, missing checkpoints and failures retained. At most two seed17 fits, one development decision, one policy fit, one evaluation. No automatic capture, new architecture, timing repair retry, paid resources, publishing or live default change. Old five-flow Spotify diagnostic stays exposed diagnostic only. Existing YT/IG/public retention is reused development, not fresh local generalization. Small support cannot establish population reliability; no improvement guarantee. Trainers/policy/evaluation executors must produce bound stage receipts before later visits can be prepared."
+}

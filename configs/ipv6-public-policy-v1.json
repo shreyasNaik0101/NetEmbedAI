@@ -1,0 +1,29 @@
+{
+  "version": "ipv6-public-policy-v1",
+  "declared_utc": "2026-11-06T14:02:49.531Z",
+  "purpose": "One public-only refusal-policy fit on the frozen added-data forest; no local outcomes, weight fitting, captures or default activation.",
+  "candidate_bundle": "experiments/ipv6-realdata-pilot-v1/plus-real-ipv6/bundle",
+  "candidate_id": "0b87d388d91fdeb4c6c87fc8a76ce8a718a02415c69c9346e1d222154b5b0473",
+  "candidate_weight_sha256": "78efcee31f1ce49a882283b8d4a585bfbc9c0980e40ace68587a98b811d5eecb",
+  "public_data": "data/processed/v2",
+  "public_manifest_sha256": "46ef59ce749e8c3da1d7bde4597e1e9697a7e97a046f01a48af0ec5f0612eae3",
+  "split": "calibration",
+  "flows_per_class": 50,
+  "budgets": [
+    10,
+    20,
+    30
+  ],
+  "primary_budget": 10,
+  "min_packets": 10,
+  "temperature": 1,
+  "threads": 2,
+  "rules": {
+    "maximum_empirical_error": 0.1,
+    "minimum_coverage": 0.5,
+    "minimum_primary_accepted_per_class": 5
+  },
+  "selection": "Exactly101 global thresholds0.00..1.00 step0.01. Require pooled and10-packet overall error<=0.10 and coverage>=0.50; each class pooled and10-packet error<=0.10 with >=5 accepted10-packet cases. Choose lowest eligible threshold. No retries, gate changes or local-data-based choice.",
+  "sampling": "First50 calibration flows per class in stored order with >=10 packets. Use only available10/20/30 prefixes. Correlated prefix cases are descriptive, not independent samples.",
+  "limits": "Historical CESNET calibration only. This fits refusal, not correctness probabilities or unknown-service detection. All earlier local training/calibration/evaluation data, public training/selection/final and prior pilot outcome files excluded. Four new evaluation visits remain sealed. New candidate is not automatically activated. Local accepted-error/coverage and replacement-model live quality/latency remain pending."
+}

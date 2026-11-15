@@ -1,0 +1,88 @@
+{
+  "version": "ten-packet-fresh-v1",
+  "workflow": "ten_packet_fresh",
+  "scope": "fresh_evaluation_only",
+  "declared_utc": "2026-11-08T18:43:10.191Z",
+  "service_url": "http://127.0.0.1:8002",
+  "source_bundle": "experiments/spotify-ten-packet-v1/bundle",
+  "source_artifact_id": "fa1f4837e4ae11c9169258ecb20338ae3c0c81c2d206231fb6fe19405b8d8549",
+  "source_weight_sha256": "b5a312fe86850a93fdc1c7b74cbfb6ffa58009e781888bafa5e47062e6f42adf",
+  "expected_policy": {
+    "version": "ten-packet-unfitted-v1",
+    "min_packets": 10,
+    "threshold": 1,
+    "temperature": 1,
+    "fitted": false,
+    "tie_break": "label_order",
+    "validation_scope": "uncalibrated_ten_packet_development",
+    "locally_checked_labels": [],
+    "note": "New explicit ten-packet decision contract; no inherited confidence policy. Requires separate fresh verification/calibration before live use."
+  },
+  "control": {
+    "bundle": "experiments/ipv6-public-policy-v1/bundle",
+    "artifact_id": "9878d0818370ede3e9897a9cc654b4ddc0afcd87d41b2d7134ccaf52592b528a",
+    "weight_sha256": "78efcee31f1ce49a882283b8d4a585bfbc9c0980e40ace68587a98b811d5eecb"
+  },
+  "interface": "9",
+  "offset_minutes": 330,
+  "threads": 2,
+  "budgets": [
+    10
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram",
+    "spotify"
+  ],
+  "minimum_target_at_10_per_trial": 3,
+  "minimum_target_at_30_per_trial": 0,
+  "expanded_netlog_required": true,
+  "require_zero_drops": false,
+  "network_context": {
+    "type": "same_user_declared_mobile_hotspot",
+    "limits": "Interface presence verified before each intent; phone hotspot identity is user-declared. No new-network or campus-generalization claim."
+  },
+  "browser_session_policy": "Completely exit Chrome before each intent; reopen normal Chrome afterward. Start stripped NetLog, then user-start capture, then navigate target. Stop capture/logging and keep Chrome open through archive. Keep one Edge viewer visible and foreground after playback begins; do not refresh or start again before archive.",
+  "collection": {
+    "maximum_visits": 3,
+    "attempts_per_slot": 1,
+    "activity_seconds": 60,
+    "capture_cap_seconds": 120,
+    "order": "YouTube, Instagram, Spotify; dates may advance, sessions must not overlap or repeat.",
+    "quality": "All independently mapped socket-prefix-QC flows retained, independent of predictions. At least3 target connections reach10 per visit; no30-packet minimum. Source eviction, wrong mode or bad parity fails collection. Counted event drops can retain offline QC data but cannot pass the clean operational gate. No replacement visits after QC/support failure. Processing errors preserve the same bound attempt."
+  },
+  "rules": {
+    "minimum_candidate_target_recall": 0.8,
+    "no_target_recall_loss_to_control": true,
+    "minimum_spotify_correct_gain": 1,
+    "minimum_native_end_to_end_raw_recall": 0.8,
+    "minimum_native_checkpoint_coverage": 0.8,
+    "zero_drops_for_operational": true,
+    "all_required": true
+  },
+  "trials": [
+    {
+      "id": "ten-fresh-yt-01",
+      "target": "youtube",
+      "role": "fresh_verification",
+      "day": 1,
+      "activity": "Fresh normal Chrome, different YouTube video for60s."
+    },
+    {
+      "id": "ten-fresh-ig-01",
+      "target": "instagram",
+      "role": "fresh_verification",
+      "day": 1,
+      "activity": "Fresh normal Chrome, scroll feed30s then watch different Reels30s."
+    },
+    {
+      "id": "ten-fresh-sp-01",
+      "target": "spotify",
+      "role": "fresh_verification",
+      "day": 1,
+      "activity": "Fresh normal Chrome, different artist or album; play60s, no required skips."
+    }
+  ],
+  "scoring": "After all3 usable visits, once. Primary target flows from their own visits; identical first10 input for both frozen models. Incidental supported flows are secondary. Actual ten-packet native guesses stay distinct from offline replay. Short flow/reference inventories retained, never filled or relabelled.",
+  "limits": "New small three-service prospective raw-model/live-delivery verification on one user-declared hotspot, one visit per service. No weights, threshold fitting, training-data access, automatic capture, promotion or deployment of a fitted policy. Model displayed is uncalibrated, so all accepted labels stay withheld; raw top guesses are not calibrated decisions. Fresh raw quality and operational gates are separately reported and all are required for full screen pass. Any failure stops this scope without new recordings, gate changes or seeds. Calibration and final accepted-prediction evidence require separate later fixed-role data; this verification can never be used to fit them. Existing failed studies stay failed."
+}

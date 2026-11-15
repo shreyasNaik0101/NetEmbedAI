@@ -1,0 +1,3 @@
+# Preserve the checksum-verified upstream reference bytes on every OS.
+src/netembed/reference_data/servicemap.csv -text whitespace=cr-at-eol
+tests/fixtures/rfc9001.ipfixprobe.stdout.txt -text

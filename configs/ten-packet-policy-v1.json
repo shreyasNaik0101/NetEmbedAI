@@ -1,0 +1,135 @@
+{
+  "version": "ten-packet-policy-v1",
+  "workflow": "ten_packet_policy",
+  "scope": "fresh_evaluation_only",
+  "declared_utc": "2026-11-09T09:54:33.655846+00:00",
+  "service_url": "http://127.0.0.1:8002",
+  "source_bundle": "experiments/spotify-ten-packet-v1/bundle",
+  "source_artifact_id": "fa1f4837e4ae11c9169258ecb20338ae3c0c81c2d206231fb6fe19405b8d8549",
+  "source_weight_sha256": "b5a312fe86850a93fdc1c7b74cbfb6ffa58009e781888bafa5e47062e6f42adf",
+  "labels": [
+    "youtube",
+    "spotify",
+    "instagram",
+    "tiktok",
+    "snapchat",
+    "whatsapp",
+    "facebook-messenger",
+    "discord",
+    "google-drive",
+    "microsoft-outlook"
+  ],
+  "interface": "9",
+  "offset_minutes": 330,
+  "threads": 2,
+  "budgets": [
+    10
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram",
+    "spotify"
+  ],
+  "minimum_target_at_10_per_trial": 3,
+  "minimum_target_at_30_per_trial": 0,
+  "minimum_native_coverage": 0.8,
+  "expanded_netlog_required": true,
+  "require_zero_drops": true,
+  "network_context": {
+    "type": "same_user_declared_mobile_hotspot",
+    "limits": "Interface presence verified before each intent; phone hotspot identity is user-declared. No new-network or campus-generalization claim."
+  },
+  "browser_session_policy": "Close Chrome entirely before each intent; reopen normal Chrome afterward. Stripped NetLog, user-start capture once, navigate target. Use Chrome normally for60s with Edge in background, then return to Edge and Stop. Stop logging and keep Chrome open through archive. Background use is user-declared; no claim of browser visibility measurement. Do not refresh or restart during capture.",
+  "trials": [
+    {
+      "id": "ten-policy-cal-yt-01",
+      "target": "youtube",
+      "role": "calibration",
+      "day": 1,
+      "activity": "Play a previously unused YouTube video for60s."
+    },
+    {
+      "id": "ten-policy-cal-ig-01",
+      "target": "instagram",
+      "role": "calibration",
+      "day": 1,
+      "activity": "Scroll Instagram feed30s then watch different Reels30s."
+    },
+    {
+      "id": "ten-policy-cal-sp-01",
+      "target": "spotify",
+      "role": "calibration",
+      "day": 1,
+      "activity": "Play a different Spotify artist or album for60s; no skips required."
+    },
+    {
+      "id": "ten-policy-final-yt-01",
+      "target": "youtube",
+      "role": "final",
+      "day": 2,
+      "activity": "Play a previously unused YouTube video for60s.",
+      "later_date_than": [
+        "ten-policy-cal-yt-01",
+        "ten-policy-cal-ig-01",
+        "ten-policy-cal-sp-01"
+      ]
+    },
+    {
+      "id": "ten-policy-final-ig-01",
+      "target": "instagram",
+      "role": "final",
+      "day": 2,
+      "activity": "Scroll Instagram feed30s then watch different Reels30s.",
+      "later_date_than": [
+        "ten-policy-cal-yt-01",
+        "ten-policy-cal-ig-01",
+        "ten-policy-cal-sp-01"
+      ]
+    },
+    {
+      "id": "ten-policy-final-sp-01",
+      "target": "spotify",
+      "role": "final",
+      "day": 2,
+      "activity": "Play a different Spotify artist or album for60s; no skips required.",
+      "later_date_than": [
+        "ten-policy-cal-yt-01",
+        "ten-policy-cal-ig-01",
+        "ten-policy-cal-sp-01"
+      ]
+    }
+  ],
+  "verification_report": "artifacts/local/ten-packet-fresh-continuation-v1/comparison.json",
+  "prerequisites": {
+    "artifacts/local/ten-packet-fresh-continuation-v1/comparison.json": "55ca82402a6204bc6bcf406121907e8f1decc4be1f4a4aa5a3fdfef9b1ab47a9",
+    "artifacts/local/heartbeat-fix-v1/idle-smoke.json": "0d2e71549702686d61948f5d86e868e338486fa4295dc327a9f18a54e658c8a3",
+    "src/netembed/api.py": "d58c69a9c27bf61aad8b6be05fc9c769693435ceb8d6c0461c8f8817ff5fe11d",
+    "src/netembed/bundle.py": "9480d63d407a8c125bdfe99ffd22e92c60a109c4cf59ebf240c97ab241a623a7",
+    "src/netembed/ten_policy.py": "1918333696993c88913565907377c49b8ae0fe42233335d659eb4ed323f86fce",
+    "scripts/ten_packet_policy.py": "d0a25e1844094bc75d17be168443ea4813b30ccd79059d9d2a0c2cf86032e94e",
+    "ui/src/App.tsx": "74f34c7b0cdba321dbd20bdb067b3b81e79c61a6ef5cbaa82909c33da4f85d6a"
+  },
+  "policy_rules": {
+    "threshold_grid": "0.00 through1.00 inclusive, step0.01; lowest eligible threshold",
+    "minimum_accepted_per_service": 2,
+    "minimum_coverage": 0.5,
+    "maximum_primary_error": 0,
+    "maximum_overall_error": 0.1,
+    "accepted_labels": [
+      "youtube",
+      "instagram",
+      "spotify"
+    ],
+    "temperature": 1
+  },
+  "collection": {
+    "maximum_visits": 6,
+    "attempts_per_slot": 1,
+    "activity_seconds": 60,
+    "capture_cap_seconds": 120,
+    "stop_rule": "QC/support failure, interruption, restart or no eligible threshold stops the scope. Processing failures preserve the same attempt. No replacement or extra slots, threshold relaxation, weights/normalizer fitting, alternative model or automatic default promotion."
+  },
+  "roles": "First three new single-attempt visits fit one global acceptance threshold on independently mapped known-service first10 flows, including incidental mapped services. Primary gates use target service in its own visit. All prior private/public data and final visits excluded from fitting. Final visits require fitted bundle freeze, its explicit local validation service activation, and later local date than all calibration visits; no changes after final.",
+  "operational": "Both roles require zero drops, retained evidence, no heartbeat/disconnect/process-error stop, unique Start, native10 checkpoint coverage>=0.8 per target, complete non-evicted prediction receipt tracking and native-source replay parity. Timeout may preserve diagnostics but cannot count as a clean pass. No automated capture in preflight, tests or serve.",
+  "limits": "Small local three-service empirical acceptance screen, not calibrated correctness probabilities or general reliability. Six visits on one user-declared hotspot; connections within a visit are correlated. No new-network, unknown-service detection, security or hard-real-time claim. Unsupported/ambiguous traffic is inventoried and not assigned guessed reference labels. Only YT/IG/Spotify can be accepted; all ten raw alternatives retain their original model score ordering. Older failed studies stay failed; the16-flow fresh verification is never calibration. Public calibration and final data are excluded entirely. No automatic promotion, publishing or cloud costs."
+}

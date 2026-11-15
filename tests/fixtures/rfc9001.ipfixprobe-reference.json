@@ -1,0 +1,59 @@
+{
+  "source": "constructed_rfc9001_protocol_fixture",
+  "fixture": true,
+  "pcap_sha256": "5eb614d13006a7c6dc06732b71de01b447795db6cb1e03fc2c7717f257c09e1c",
+  "reference_tool": "CESNET ipfixprobe PSTATS",
+  "reference_version": "5.8.0",
+  "docker_image_id": "sha256:461d082e71bffe2304d60ba2f409bb2e00002d1dd83d1eca0c46ef0a3781ea61",
+  "reference_stdout_sha256": "4c557358b427087ce811194bb54b85fed40366888a6c462c3f5a6b084b795429",
+  "reference_text_timestamp_format": "integer seconds dot integer microseconds; microseconds are not zero-padded",
+  "reference_features": {
+    "schema_version": "1",
+    "packets": [
+      {
+        "iat_ms": 0.0,
+        "direction": 1,
+        "payload_bytes": 1200
+      },
+      {
+        "iat_ms": 8.5,
+        "direction": -1,
+        "payload_bytes": 135
+      },
+      {
+        "iat_ms": 1.5,
+        "direction": 1,
+        "payload_bytes": 1200
+      }
+    ]
+  },
+  "adapter_features": {
+    "schema_version": "1",
+    "packets": [
+      {
+        "iat_ms": 0.0,
+        "direction": 1,
+        "payload_bytes": 1200
+      },
+      {
+        "iat_ms": 8.499999999997954,
+        "direction": -1,
+        "payload_bytes": 135
+      },
+      {
+        "iat_ms": 1.5000000000071623,
+        "direction": 1,
+        "payload_bytes": 1200
+      }
+    ]
+  },
+  "raw_features_match": true,
+  "absolute_tolerance": 1e-07,
+  "adapter_counters": {
+    "ignored": 0,
+    "evicted": 0,
+    "frozen": 0,
+    "reordered": 0
+  },
+  "note": "Independent current exporter on a constructed offline protocol fixture. No trained-model, real user-capture, local-quality or historical 2022 CSV quantization claim follows."
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "forest",
+    "seed": 17,
+    "loss": "ce",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 17,
+    "loss": "ce",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 17,
+    "loss": "ce",
+    "augmentation": true
+  },
+  {
+    "kind": "tcn",
+    "seed": 17,
+    "loss": "supcon",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 17,
+    "loss": "supcon",
+    "augmentation": true
+  },
+  {
+    "kind": "forest",
+    "seed": 42,
+    "loss": "ce",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 42,
+    "loss": "ce",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 42,
+    "loss": "ce",
+    "augmentation": true
+  },
+  {
+    "kind": "tcn",
+    "seed": 42,
+    "loss": "supcon",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 42,
+    "loss": "supcon",
+    "augmentation": true
+  },
+  {
+    "kind": "forest",
+    "seed": 123,
+    "loss": "ce",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 123,
+    "loss": "ce",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 123,
+    "loss": "ce",
+    "augmentation": true
+  },
+  {
+    "kind": "tcn",
+    "seed": 123,
+    "loss": "supcon",
+    "augmentation": false
+  },
+  {
+    "kind": "tcn",
+    "seed": 123,
+    "loss": "supcon",
+    "augmentation": true
+  }
+]

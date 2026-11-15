@@ -1,103 +1,122 @@
 # NetEmbedAI
 
-**Can a network figure out which app your encrypted traffic belongs to — even when someone tries to disguise it?**
+NetEmbedAI is an **experimental local application** for exploring whether early
+encrypted QUIC packet patterns can distinguish services. A user starts capture
+in one React screen; a local FastAPI service feeds packet sizes, directions and
+timing to a trained model. It also supports explicitly separate recorded replay.
 
-That's the question this project answers. It identifies apps (YouTube, Instagram, Spotify…) from *encrypted* network traffic without ever decrypting it, and — the main contribution — it keeps working even when the traffic is deliberately **disguised to evade detection**.
+The model does not read packet contents, destination names, IP addresses or
+process names. Endpoints group packets temporarily; optional Chrome reference
+logging is used separately for evaluation. The capture adapter requires a
+TShark-dissected QUIC Initial to begin a flow: UDP/443 alone is not proof of QUIC.
 
-![Morph demo: the same Instagram traffic, before and after disguise](assets/morph_demo.gif)
+## What works, and what the evidence says
 
-*Real output from the trained models. On normal traffic, both models correctly say "Instagram." Once the traffic is disguised (padded and re-timed, but the content is unchanged), the ordinary model is fooled into a confident wrong answer — while the robust model still gets it right.*
+The recommended **showcase profile** is a locally trained, fixed-ten-packet
+forest. It waits for ten packets and uses only those first ten for its scores;
+later packets remain visible. Its acceptance policy is unfitted, so the app
+shows experimental alternatives and withholds accepted labels. Model scores are
+not probabilities of correctness, and a list of model labels is not proof that
+every service works on your network.
 
----
+* In one small fresh local raw-guess check, all **16** eligible connections were
+  ranked correctly: YouTube 7/7, Instagram 4/4 and Spotify 5/5. They came from
+  three visits on one user-declared hotspot; the Instagram viewer timed out.
+* A separately fitted acceptance policy selected threshold zero and **failed**
+  its later final screen. In the three target visits it accepted a YouTube
+  connection as Spotify (8/9 correct accepted YouTube), accepted 6/6 Instagram,
+  and accepted 4/5 Spotify with one withheld. The policy was not promoted.
+* A matched timing-jitter forest passed its development gates at seed 17 but
+  failed at seeds 42 and 123. It was not promoted. These are reused development
+  examples and abstract stress tests, not new final accuracy.
+* Separately, the historical CESNET held-out week gave the augmented TCN macro-F1
+  **0.84285 at ten packets** and **0.88636 at thirty**. Those figures describe a
+  different model and stored dataset; they are not local showcase accuracy.
+* One deliberately user-started PCAP prefix matched the current adapter and
+  ipfixprobe 5.8.0 on 30 packet sizes, directions and timing values. Both read
+  the same saved bytes offline. This is limited parser evidence, not proof of
+  classifier accuracy or full live-event parity.
 
-## The problem, in plain words
+This is an interview/learning prototype, **not a validated release or an
+unknown-service detector**. It has no guarantee for new networks, devices,
+apps, VPNs, adversarial traffic or hard real-time response. The honest details
+and evidence links are in the [showcase model card](docs/showcase-model-card.md).
 
-Networks (your ISP, a company firewall, a 5G carrier) constantly need to know *what* traffic is flowing — to keep video calls smooth, manage bandwidth, or catch malware. They used to just read the data. But today almost everything is **encrypted**, so they can't look inside anymore.
+## Run the local showcase on Windows
 
-The workaround: even without reading the contents, you can watch the **pattern** of the traffic — how big each packet is, which direction it goes, and its timing. Different apps have different rhythms (YouTube = big download bursts; a chat app = small back-and-forth). A model can learn those rhythms and recognize the app from the pattern alone.
+Prerequisites: Python 3.11, Node.js/npm, native TShark and Npcap. From the
+`traffic_classification` directory, with the local trained bundle present:
 
-**The catch:** anyone who wants to avoid being detected — malware especially — can **morph** their traffic: add junk padding, delay packets, split them up. The content stays the same, but the *pattern* changes, and ordinary classifiers get fooled. Most published models are only ever tested on clean traffic and quietly fall apart under this. **This project builds a classifier that holds up.**
-
-## The idea
-
-1. **Read the real rhythm.** Instead of hand-made summary statistics (the weak approach), the model reads the actual sequence of the first 30 packets — each described by its timing, direction, and size.
-2. **Learn from disguised traffic.** During training, we *deliberately* disguise the traffic (jitter, padding, dropped/added/split packets). The model learns to recognize the app *through* the disguise — like a guard trained on every trick a smuggler might use.
-
-## Does it work?
-
-**On normal traffic — yes, easily.** It identifies the app with **~95% accuracy** on real data (the previous version of this project managed only 72–78%).
-
-**Under disguise — this is the whole point.** A normal classifier collapses the moment traffic is morphed. The disguise-trained one holds up:
-
-| | Normal traffic | Disguised traffic |
-|---|---|---|
-| Ordinary classifier | ✅ great | ❌ **falls apart** |
-| Disguise-trained classifier | ✅ great | ✅ **still works** |
-
-The most important number is the **worst case** — because a real attacker attacks your *weakest* spot. Across a battery of disguise attacks, the ordinary classifier can be pushed down to near-useless, while the fully disguise-trained model never drops below a strong score — roughly a **3.5× improvement in worst-case robustness**.
-
-**And it's not a trick.** We tested the robust model against disguise techniques it had *never seen during training*. It still handled them — as long as they targeted the kind of change it had learned about. That rules out the "it only works because we tested it on the exact thing we trained it on" criticism.
-
-## The honest limits
-
-This project is deliberately upfront about what it *doesn't* do:
-
-- **There's a cost to robustness.** Making the model disguise-proof trades away a little accuracy on clean traffic (~10 points). Robustness isn't free.
-- **Robustness only covers what you train for.** The model resists the *kinds* of disguise it practiced against; a completely different trick can still hurt it. (Adding that trick to training fixes it — robustness follows what you cover.)
-- **It's a research prototype, not a live product.** It doesn't sniff live traffic yet, and it's trained on one network's data, so it wouldn't be accurate on a totally different network without retraining.
-- **It can't recognize brand-new apps** it was never trained on very well — that's a known hard problem in the field.
-
-Every number in this README is measured, not idealized.
-
-## Try the demo yourself
-
-```bash
-# Watch traffic get classified packet-by-packet, live in your terminal:
-python demo_replay.py                 # random flows
-python demo_replay.py --app youtube   # pick an app
-python demo_replay.py --morph         # disguise it and watch the model react
+```powershell
+.\.venv\Scripts\python.exe scripts/serve_showcase.py
 ```
 
-You'll see the packets stream in, the model's guess grow more confident as data arrives, and — with `--morph` — how disguising the traffic changes the outcome.
+Open `http://127.0.0.1:8002` in one browser tab. If port 8002 already runs this
+profile, use the existing tab; otherwise choose another port with `--port 8003`.
+The launcher verifies the exact unfitted bundle before starting. Confirm **Stream connected**,
+select the actual network interface, press **Start**, then open a fresh QUIC
+connection. Inspect arriving packet metadata and model alternatives, then press
+**Stop**. A disconnected or unresponsive viewer stops capture; reconnecting
+does not restart it. Nothing captures during installation or server startup.
 
-## The numbers (for the curious)
+For a detailed walkthrough and troubleshooting, see [the demo runbook](docs/demo-runbook.md).
+The optional Chrome NetLog/reference workflow is not required for ordinary use;
+it is a separate evaluator and can contain sensitive network metadata.
 
-Real CESNET-QUIC22 data, 10 apps, macro-F1:
+### Fresh setup and model files
 
-| Model | Clean | Disguised | Worst-case (any attack) |
-|---|---|---|---|
-| Ordinary (supervised) | 0.91 | 0.21 | 0.18 |
-| Disguise-trained (timing/size) | 0.88 | 0.76 | 0.18 |
-| Disguise-trained (all attack types) | 0.81 | — | **0.64** |
-
-A causal **TCN** does the classifying — it's fast, works packet-by-packet (so it could run live), and beats an LSTM/BiLSTM baseline while using fewer parameters.
-
-## Reproduce
-
-```bash
-pip install torch cesnet-datazoo scikit-learn matplotlib
-
-python -m src.data.cesnet_loader                                    # download + build data (~2.7 GB once)
-python -m src.train.train --mode supervised  --encoder tcn          # ordinary model
-python -m src.train.train --mode contrastive --morph --encoder tcn  # disguise-trained model
-python -m src.train.train --mode contrastive --morph --broad_aug --encoder tcn \
-    --tag tcn_contrastive_broadmorph                                # robust to all attack types
-
-python -m src.eval.compare              # results table
-python -m src.eval.robustness --tags tcn_supervised tcn_contrastive_morph
-python -m src.eval.heldout_attacks      # test against unseen disguise techniques
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --no-deps -r requirements-cpu.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+npm --prefix ui ci
+npm --prefix ui run build
 ```
 
-## Layout
+Trained bundles and datasets are ignored by Git. A fresh checkout therefore
+needs a legitimate bundle copied from an authorized local archive or regenerated
+from the documented data and training artifacts; no weights are downloaded or
+fabricated automatically. Inference itself does **not** need the training data.
+For the same showcase bundle elsewhere, pass its extracted directory to the
+launcher with `--bundle`. The bundle
+contains checksummed weights, preprocessing, labels, architecture, versions,
+policy and provenance. The local showcase bundle identity is
+`fa1f4837e4ae11c9169258ecb20338ae3c0c81c2d206231fb6fe19405b8d8549`;
+its `forest.json` SHA-256 is
+`b5a312fe86850a93fdc1c7b74cbfb6ffa58009e781888bafa5e47062e6f42adf`.
+A local archive is at `artifacts/local/showcase/netembed-ten-packet-unfitted.zip`,
+SHA-256 `019369d9c9f88261fc3892a17facb92efaf4e3b7031ef80fd92a53890088a9be`.
+Check its extracted inference with training and capture files denied using
+`.\.venv\Scripts\python.exe scripts/check_showcase_archive.py`.
+To create it at a new path, run:
 
-```
-src/
-  data/    cesnet_loader.py   augment.py (the disguise/morph logic)   transforms.py
-  models/  tcn.py  lstm.py  heads.py
-  losses/  supcon.py
-  train/   train.py           # ordinary / disguise-trained / hold-out
-  eval/    compare.py  robustness.py  embeddings.py  fewshot.py  heldout_attacks.py
-demo_replay.py                # the live terminal demo
+```powershell
+.\.venv\Scripts\python.exe scripts/package_bundle.py --bundle experiments/spotify-ten-packet-v1/bundle --decision experiments/spotify-ten-packet-v1/decision.json --model-card docs/showcase-model-card.md --output artifacts/local/showcase/new-archive.zip
 ```
 
-See [ROADMAP.md](ROADMAP.md) for the design rationale and what's intentionally left as future work.
+Local user-derived data and PCAPs are private; do not redistribute them without
+appropriate authorization.
+
+Linux/macOS users can use `.venv/bin/python` and native TShark; this showcase
+setup has only been checked locally on Windows. Docker is optional and used for
+the independent exporter check, not for normal inference.
+
+## Verify
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m ruff check src scripts tests
+npm --prefix ui test
+npm --prefix ui run build
+```
+
+Tests use constructed fixtures and do not start real capture. Real live quality,
+benchmark results and software tests are separate evidence. See the
+[beginner interview guide](docs/interview-guide.md),
+[final policy result](docs/ten-packet-policy-v1.md),
+[timing experiment](docs/timing-jitter-matched-v1.md),
+[showcase verification](docs/showcase-verification-20261110.md),
+[data card](docs/data-card.md), and
+[historical README](docs/readme-history-20261110.md). The compact TCN and
+same-data classical baseline remain in the repository; contrastive learning was
+not retained as the default based on the matched development comparison.

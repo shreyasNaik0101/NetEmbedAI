@@ -1,0 +1,105 @@
+Service,Service Provider,Tag,Service Category,Domains
+Google Search & Maps,google,google-www,Search,"www.google.com, www.google.cz, www.google.at, www.google.sk, www.google.de, maps.googleapis.com, mobilemaps.googleapis.com"
+Google Play,google,google-play,Other services and APIs,"play.google.com, *.gvt1.com, *.gvt2.com, *.gvt3.com, android.clients.google.com, play.googleapis.com"
+Google Backend Services,google,google-services,Other services and APIs,"clients2.google.com, clients3.google.com, clients4.google.com, clients5.google.com, clients6.google.com, signaler-pa.clients6.google.com"
+Google Gstatic,google,google-gstatic,Streaming media,"ssl.gstatic.com, www.gstatic.com, encrypted-tbn0.gstatic.com"
+Google User Content,google,google-usercontent,Streaming media,*.googleusercontent.com
+Google Authentication,google,google-authentication,Authentication services,"accounts.google.com, myaccount.google.com, oauth2.googleapis.com, ogs.google.com, ogs.google.sk, ogs.google.at, accounts.youtube.com, oauthaccountmanager.googleapis.com, accounts.google.sk"
+Google Connectivity Check,google,google-conncheck,Analytics & Telemetry,connectivitycheck.gstatic.com
+Google Fonts,google,google-fonts,Streaming media,"fonts.gstatic.com, fonts.googleapis.com"
+Google Drive,google,google-drive,File sharing,*.drive.google.com
+Google Docs,google,google-docs,File sharing,*.docs.google.com
+Google Photos,google,google-photos,File sharing,"photos.google.com, photos.googleapis.com, photosdata-pa.googleapis.com"
+Google Colab,google,google-colab,File sharing,colab.research.google.com
+Google Translate,google,google-translate,Other services and APIs,"translate.google.com, translate.googleapis.com, translate.google.sk, translate.google.at, translate-pa.googleapis.com"
+Gmail,google,gmail,Mail,"*.gmail.com, *.mail.google.com"
+Youtube,google,youtube,Streaming media,"*.googlevideo.com, *.video.google.com, *.youtu.be, *.youtube-nocookie.com, *.youtube-ui.l.google.com, *.youtube.com, *.youtube.googleapis.com, *.youtubeeducation.com, *.youtubei.googleapis.com, *.yt3.ggpht.com, *.ytimg.com"
+Google Hangouts & Meets,google,google-hangouts,Videoconferencing,"hangouts.google.com, meet.google.com, meetings.googleapis.com, hangouts.clients6.google.com, hangouts.googleapis.com"
+Google Analytics & Ads,google,google-ads,Advertising,"*.2mdn.net, *.adsense.google.com, *.adservice.google.ca, *.adservice.google.co.in, *.adservice.google.co.kr, *.adservice.google.co.uk, *.adservice.google.co.za, *.adservice.google.com, *.adservice.google.com.ar, *.adservice.google.com.au, *.adservice.google.com.br, *.adservice.google.com.co, *.adservice.google.com.gt, *.adservice.google.com.mx, *.adservice.google.com.pe, *.adservice.google.com.ph, *.adservice.google.com.pk, *.adservice.google.com.tr, *.adservice.google.com.tw, *.adservice.google.com.vn, *.adservice.google.de, *.adservice.google.dk, *.adservice.google.es, *.adservice.google.fr, *.adservice.google.nl, *.adservice.google.no, *.adservice.google.ru, *.adservice.google.vg, *.app-measurement.com, *.doubleclick.com, *.doubleclick.net, *.doubleclickbygoogle.com, *.google-analytics.com, *.googleadservices.com, *.googlesyndication.com, *.googletagmanager.com, *.googletagservices.com, *.gstaticadssl.l.google.com, *.mail-ads.google.com, *.ssl-google-analytics.l.google.com, *.www-googletagmanager.l.google.com, adservice.google.at, adservice.google.sk"
+Google Safe Browsing API,google,google-safebrowsing,Antivirus,safebrowsing.googleapis.com
+Google reCAPTCHA,google,google-recaptcha,Authentication services,www.recaptcha.net
+Google Pay,google,google-pay,Other services and APIs,pay.google.com
+Google IMA SDK,google,google-imasdk,Advertising,imasdk.googleapis.com
+Google Calendar,google,google-calendar,Other services and APIs,"calendar.google.com, calendar-pa.clients6.google.com, calendarsync-pa.googleapis.com, calendarsuggest.clients6.google.com, calendarpushsubscription-pa.googleapis.com"
+Google Autofill,google,google-autofill,Other services and APIs,content-autofill.googleapis.com
+Google Scholar,google,google-scholar,Other services and APIs,"scholar.google.com, scholar.google.at, scholar.google.sk, scholar.google.de"
+Firebase Crashlytics,google,firebase-crashlytics,Analytics & Telemetry,firebase-settings.crashlytics.com
+Chrome Remote Desktop API,google,chrome-remotedesktop,Other services and APIs,remotedesktop-pa.googleapis.com
+Blogger,google,blogger,Blogs & News,*.blogspot.com
+Facebook Graph API,facebook,facebook-graph,Other services and APIs,"graph.facebook.com, b-graph.facebook.com"
+Facebook Graph Games API,facebook,facebook-gamesgraph,Other services and APIs,graph.fb.gg
+Facebook Media,facebook,facebook-media,Streaming media,"*.xx.fbcdn.net, *.fna.fbcdn.net"
+Facebook Web,facebook,facebook-web,Social,"www.facebook.com, m.facebook.com, web.facebook.com"
+Facebook Connect,facebook,facebook-connect,Authentication services,connect.facebook.net
+Facebook Resumable Upload,facebook,facebook-rupload,File sharing,rupload.facebook.com
+Facebook Messenger,facebook,facebook-messenger,Instant messaging,www.messenger.com
+Instagram,facebook,instagram,Social,"*.cdninstagram.com, *.ig.me, *.instagram.com"
+WhatsApp,facebook,whatsapp,Instant messaging,"*.whatsapp.com, *.whatsapp.net"
+MS Outlook,microsoft,microsoft-outlook,Mail,"outlook.office365.com, m.hotmail.com, eas.outlook.com, outlook.office.com, attachments.office.net, outlook.live.com, attachment.outlook.live.net"
+MS Substrate Services,microsoft,microsoft-substrate,Other services and APIs,substrate.office.com
+Alza,alza,alza-www,E-commerce,"www.alza.cz, m.alza.cz"
+Alza WebAPI,alza,alza-webapi,Other services and APIs,webapi.alza.cz
+Alza Identity,alza,alza-identity,Authentication services,identity.alza.cz
+Overleaf Compile,overleaf,overleaf-compile,Other services and APIs,compiles.overleaf.com
+Overleaf CDN,overleaf,overleaf-cdn,Streaming media,cdn.overleaf.com
+TikTok,,tiktok,Social,*.tiktokv.com
+Snapchat,,snapchat,Social,"*.addlive.io, *.sc-cdn.net, *.snapchat.com"
+Dcard,,dcard,Social,*.dcard.tw
+Unity Games,,unitygames,Games,*.unity3d.com
+Blitz,,blitz-gg,Games,*.blitz.gg
+Easybrain,,easybrain,Games,*.easybrain.com
+Chess.com,,chess-com,Games,"*.chess.com, *.chesscomfiles.com"
+CSGO Market,,csgo-market,Games,market.csgo.com
+Gamedock,,gamedock,Games,*.gamedock.io
+Play.cz Radio,,playradio,Streaming media,onair.play.cz
+JsDelivr,,jsdelivr,Streaming media,cdn.jsdelivr.net
+Font Awesome,,fontawesome,Streaming media,*.fontawesome.com
+Cloudflare CDNjs,,cloudflare-cdnjs,Streaming media,cdnjs.cloudflare.com
+Signal CDN,,signal-cdn,Streaming media,cdn2.signal.org
+Spankbang,,spanbang,Streaming media,*.spankbang.com
+XHamster,,xhamster,Streaming media,"*.xhamster.com, *.xhamsterlive.com"
+Apple iCloud Private Relay,,apple-privaterelay,Other services and APIs,"mask.icloud.com, mask-canary.icloud.com"
+Garmin,,garmin,Other services and APIs,*.garmin.com
+DoH (5 providers),,dns-doh,Other services and APIs,"*.cloudflare-dns.com, dns.google, dns.google.com, dns.adguard.com, doh.opendns.com, odvr.nic.cz, doh.familyshield.opendns.com"
+Flightradar24,,flightradar24,Other services and APIs,*.flightradar24.com
+Click Endnote,,endnote-click,Other services and APIs,click.endnote.com
+Fitbit,,fitbit,Other services and APIs,*.fitbit.com
+Toggl,,toggl,Other services and APIs,*.toggl.com
+doi.org,,doi-org,Other services and APIs,*.doi.org
+Uber,,uber,Other services and APIs,*.uber.com
+AdAvoid,,adavoid,Other services and APIs,*.adavoid.org
+Cedexis,,cedexis,Other services and APIs,*.cedexis.com
+Bitly,,bitly,Other services and APIs,*.bit.ly
+Pocasi Data,,pocasidata-cz,Other services and APIs,data.pocasi-data.cz
+Mentimeter,,mentimeter,Other services and APIs,"*.mentimeter.com, *.menti.com"
+NCBI,,ncbi-gov,Information systems,*.ncbi.nlm.nih.gov
+eToro,,etoro,Information systems,www.etoro.com
+Kaggle,,kaggle,Information systems,www.kaggle.com
+MDPI Publisher,,mdpi,Information systems,*.mdpi.com
+Livescore,,livescore,Information systems,*.livescore.com
+Kiwi,,kiwi-com,Information systems,*.kiwi.com
+4chan,,4chan,Blogs & News,*.4chan.org
+Forum24,,forum24,Blogs & News,*.forum24.cz
+SME,,sme-sk,Blogs & News,"*.sme.sk, *.smedata.sk"
+Medium,,medium,Blogs & News,*.medium.com
+Openx,,openx,Advertising,*.openx.net
+ConnectAd,,connectad,Advertising,*.connectad.io
+Joinhoney,,joinhoney,Advertising,*.joinhoney.com
+Dm,,dm-de,E-commerce,*.dm.de
+DrMax,,drmax,E-commerce,*.drmax.cz
+Rohlik,,rohlik,E-commerce,*.rohlik.cz
+eBay Kleinanzeigen,,ebay-kleinanzeigen,E-commerce,*.ebay-kleinanzeigen.de
+Revolut,,revolut,E-commerce,*.revolut.com
+TawkTo,,tawkto,E-commerce,*.tawk.to
+Hubspot,,hubspot,E-commerce,*.hubspot.com
+GoOut,,goout,E-commerce,*.goout.net
+Spotify,,spotify,Music,*.spotify.com
+Shazam,,shazam,Music,*.shazam.com
+Usercentrics,,usercentrics,Analytics & Telemetry,*.usercentrics.eu
+OneSignal,,onesignal,Analytics & Telemetry,"onesignal.com, api.onesignal.com"
+TinyPass,,tinypass,Analytics & Telemetry,*.tinypass.com
+Discord,,discord,Instant messaging,"*.discord.com, *.discord.gg, *.discord.media, *.discordapp.com, *.discordapp.net, *.discordstatus.com"
+hCaptcha,,hcaptcha,Authentication services,*.hcaptcha.com
+Bitdefender Nimbus,,bitdefender-nimbus,Antivirus,nimbus.bitdefender.net
+Google Background,,google-background,default,"*.google.com, *.gstatic.com, *.googleapis.com, *.ggpht.com, *.google.at"
+Facebook Background,,facebook-background,default,"*.facebook.com, *.fb.gg, *.fbcdn.net, *.facebook.net, *.messenger.com"

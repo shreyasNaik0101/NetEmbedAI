@@ -1,0 +1,71 @@
+{
+  "version": "prospective-paired-v1",
+  "declared_utc": "2026-10-31T09:46:03.848695+00:00",
+  "purpose": "Fresh-session comparison only; prior failed development gates preserved; no fitting, calibration or promotion",
+  "models": {
+    "prefix": {
+      "bundle": "experiments/browser-adaptation/prefix-linear-probe-solver-recovery-v1/bundle",
+      "metadata": {
+        "path": "experiments/browser-adaptation/prefix-linear-probe-solver-recovery-v1/bundle/metadata.json",
+        "sha256": "483dcd5ea9af2dce2da16c818ee73341f1eb328a032ad56a192c32b7f552e7dd"
+      }
+    },
+    "forest": {
+      "bundle": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle",
+      "metadata": {
+        "path": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle/metadata.json",
+        "sha256": "bd79923fabc4816cc2f15b4f150a5d3b428663c455d0fde3da6ab219eb666d62"
+      }
+    }
+  },
+  "source_bundle": "experiments/full-real/20261024-151720-3532794c/bundle",
+  "source_artifact_id": "18c43fe12262b81d4a3001df150a278865f3908ddd3aab934822fc0c9e5750fb",
+  "interface": "9",
+  "offset_minutes": 330,
+  "trials": [
+    {
+      "id": "paired-ig-01",
+      "target": "instagram",
+      "day": 1,
+      "activity": "Scroll feed for 30 seconds, then watch Reels for 30 seconds."
+    },
+    {
+      "id": "paired-yt-01",
+      "target": "youtube",
+      "day": 1,
+      "activity": "Open a video not used in earlier recordings and watch for 60 seconds."
+    },
+    {
+      "id": "paired-yt-02",
+      "target": "youtube",
+      "day": 2,
+      "activity": "On a later local date, open a different video and watch for 60 seconds."
+    },
+    {
+      "id": "paired-ig-02",
+      "target": "instagram",
+      "day": 2,
+      "activity": "On that later date, scroll feed for 30 seconds, then watch different Reels for 30 seconds."
+    }
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "minimum_target_at_10_per_trial": 3,
+  "minimum_target_at_30_per_trial": 1,
+  "eligibility": "mapped-valid-prefix-v1; all supported mapped flows retained; ambiguous/unmapped inventory preserved; no prediction-based exclusion",
+  "primary": "10 packets: within each independently referenced class average recall equally over visits with that class, then average the two class recalls; report both models and paired difference",
+  "diagnostic_pass": "All four usable visits, each class observed on both local dates; prefix primary score >= forest primary score and each prefix class recall >=0.80. Descriptive screen only; no significance/noninferiority/general-accuracy claim or model promotion.",
+  "minimum_class_recall": 0.8,
+  "collection": "Normal Chrome and Edge app visible; Wi-Fi; reference checkbox on; longer-window statistics off; Strip private information NetLog, sensitive/raw bytes off; cap 120 seconds. User starts both logs before fresh target navigation.",
+  "attempts": "One stopped session per slot, bind raw snapshot before QC. Unusable attempt stops study; no replacement or extra capture. Archive in order; day1 same local date, day2 same later local date.",
+  "scoring": "Only after four archived usable visits. No model-score feedback during collection. Paired raw rankings on identical eligible actual prefixes. Uncalibrated prefix always withholds; report withholding separately, never interpret raw probabilities as confidence.",
+  "limits": "Initial prospective local comparison of selected candidates after reused development. Two visits per service cannot establish broad reliability. No protected calibration/final data used."
+}
