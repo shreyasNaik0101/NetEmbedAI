@@ -242,9 +242,8 @@ def create_app(bundle=None, allow_fixture=False):
                     next_heartbeat = time.monotonic() + VIEWER_HEARTBEAT_SECONDS
                     continue
                 try:
-                    event = await asyncio.wait_for(
-                        q.get(), min(2, max(0.001, next_heartbeat - time.monotonic()))
-                    )
+                    async with asyncio.timeout(min(2, max(0.001, next_heartbeat - time.monotonic()))):
+                        event = await q.get()
                 except TimeoutError:
                     if time.monotonic() >= next_heartbeat:
                         continue
@@ -274,16 +273,22 @@ def create_app(bundle=None, allow_fixture=False):
             await ws.close(code=1008, reason="viewer heartbeat expired")
         finally:
             c.viewer_cleanup = True
-            task.cancel()
-            await asyncio.gather(task, return_exceptions=True)
-            try:
-                if c.running:
-                    disconnect["at"] = time.time()
-                    c.viewer_close = disconnect
-                await c.stop(stop_reason)
-            finally:
-                c.clients.discard(q)
-                c.viewer_cleanup = False
+
+            async def cleanup_viewer():
+                try:
+                    task.cancel()
+                    await asyncio.gather(task, return_exceptions=True)
+                    if c.running:
+                        disconnect["at"] = time.time()
+                        c.viewer_close = disconnect
+                    await c.stop(stop_reason)
+                finally:
+                    c.clients.discard(q)
+                    c.viewer_cleanup = False
+
+            # The websocket handler may be cancelled as its client closes.
+            # Keep cleanup running so capture stops before ownership is released.
+            await asyncio.shield(cleanup_viewer())
 
     ui = Path(__file__).resolve().parents[2] / "ui" / "dist"
     if ui.is_dir():

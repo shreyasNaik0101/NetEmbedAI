@@ -90,7 +90,8 @@ def test_heartbeat_expiry_is_distinct_and_preserved(bundle, monkeypatch):
         assert not client.get("/capture/status").json()["running"]
 
 
-def test_server_heartbeat_keeps_timerless_viewer_alive_and_releases_on_close(monkeypatch):
+@pytest.mark.parametrize("_iteration", range(8))
+def test_server_heartbeat_keeps_timerless_viewer_alive_and_releases_on_close(monkeypatch, _iteration):
     import time
     import netembed.api as api
 
