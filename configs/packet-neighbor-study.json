@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "purpose": "fixed ordered 1-NN and feature/early-position ablations; exploratory legacy development only",
+  "representation_version": "ordered-packet-neighbors-v1",
+  "variants_in_order": ["ordered", "size_direction", "timing_direction", "after_eight"],
+  "distance": "exact L1; IPT clipped1000ms divided10; sizes/directions unscaled; zero padding; reference-order ties",
+  "neighbors": 1,
+  "training": "same 14000 public plus17 legacy local flows as paired forest/TCN; one reference per flow, NOT forest75/25 mass weighting",
+  "budget": "5/10/20/30; reference bank smallest checkpoint >= actual query length, independent of requested cap; no query future packets",
+  "after_eight": "mask first8 positions in both query/training; references of length<=8 excluded; queries<=8 abstain; no fake F1 for unavailable budget5",
+  "evaluation": "same14 retired legacy development connections and first50/class historical public selection control; no new trials or protected calibration/final data",
+  "threads": 2,
+  "benchmark_calls": 1000,
+  "benchmark_warmup": 50,
+  "benchmark_input": "experiments/browser-adaptation/pilot-01/benchmark-flow.json",
+  "gates": {"local_f1_comparability_margin": 0.01, "public_f1_loss_limit": 0.02, "class_recall_nonregression": true},
+  "stop": "one fixed comparison; no nearest-count/transform/threshold sweep; no calibrated probabilities, default promotion, new capture or claim of independent validation"
+}

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "purpose": "explicit diagnostic forward study on retired failed calibration; no deployment",
+  "train_trials": [
+    "instagram-dev-01",
+    "youtube-dev-01",
+    "instagram-dev-02",
+    "youtube-dev-02"
+  ],
+  "selection_trials": [
+    "instagram-cal-01",
+    "youtube-cal-01"
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "minimum_train_per_local_class": 3,
+  "minimum_selection_per_local_class": 2,
+  "seed": 123,
+  "threads": 2,
+  "epochs": 5,
+  "steps_per_epoch": 50,
+  "batch_size": 64,
+  "local_fraction": 0.25,
+  "learning_rate": 0.0001,
+  "public_selection_per_class": 50,
+  "public_clean_loss_limit": 0.02,
+  "local_macro_f1_gain_minimum": 0.1,
+  "require_local_class_recall_not_worse": true,
+  "forest": {
+    "n_estimators": 32,
+    "max_depth": 12,
+    "min_samples_leaf": 2
+  },
+  "benchmark_calls": 100,
+  "benchmark_warmup": 20,
+  "fitting": "CE only; warm-start TCN and reuse its original training-only normalization; no augmentation or SupCon",
+  "sampling": "75% public / 25% local training mass; local classes equally weighted; random valid prefix budgets; whole sessions kept apart",
+  "selection": "local observed-class macro-F1 averaged over 5/10/20/30 budgets; historical public clean-retention loss <=0.02 and no local-class recall regression; >=0.10 gain over base; select checkpoint on development only",
+  "simpler_model": "prefer eligible forest within 0.01 local score if its measured CPU p50 is no worse",
+  "policy": "new candidates always uncommitted until separate calibration; old confidence policy is not transferred",
+  "limits": "one training and one selection session per service; very small correlated sample; no reliable local-accuracy, few-shot, open-world or release claim",
+  "split_plan_filename": "adaptation-forward-study-v1.json",
+  "retirement_decision": "experiments/browser-adaptation/calibration-01/retirement-decision.json",
+  "retired_calibration_report": "experiments/browser-adaptation/calibration-01/report.json",
+  "local_comparison_bundle": "experiments/browser-adaptation/pilot-01/forest/bundle",
+  "local_quality_floor": 0.75,
+  "local_class_recall_floor": 0.65
+}

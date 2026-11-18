@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "purpose": "one bounded post-failure development hypothesis; retain packet order in the same forest family",
+  "feature_map": "summary-ordered-v1",
+  "feature_budget": "same first 5/10/20/30 observed packet size/direction/gap channels; 34 existing summaries + 90 saved-normalized padded values + 30 observation-mask values",
+  "reference_config": "configs/browser-forward-mass25.json",
+  "train_trials": ["instagram-dev-01", "youtube-dev-01", "instagram-dev-02", "youtube-dev-02"],
+  "selection_trials": ["instagram-cal-01", "youtube-cal-01"],
+  "prohibited_inputs": ["instagram-cal-02", "youtube-cal-02", "all final partitions and reports"],
+  "forest": {"n_estimators": 32, "max_depth": 12, "min_samples_leaf": 2},
+  "local_fraction": 0.25,
+  "threads": 2,
+  "seed_order": [17, 42, 123],
+  "stop_after_seed17_if_ineligible": true,
+  "minimum_local_f1_gain_over_paired_summary_forest": 0.01,
+  "maximum_historical_clean_loss_over_paired_summary_forest": 0.01,
+  "per_local_class_recall_regression_allowed": false,
+  "later_seeds_only_if_seed17_passes": true,
+  "deployment": false,
+  "new_policy_fitting": false,
+  "model_selection_uses_calibration02": false,
+  "limits": "Post-failure development study. Earlier selection data is already used; gains cannot be called independent validation. No retries or sweep if this single change fails. No further user recording requested during the experiment."
+}

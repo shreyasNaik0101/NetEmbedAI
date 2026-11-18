@@ -1,0 +1,25 @@
+{
+  "candidate": "B",
+  "seed": 17,
+  "artifact_id": "18c43fe12262b81d4a3001df150a278865f3908ddd3aab934822fc0c9e5750fb",
+  "data_manifest_sha256": "46ef59ce749e8c3da1d7bde4597e1e9697a7e97a046f01a48af0ec5f0612eae3",
+  "comparison": "experiments/full-real/comparison.json",
+  "development_runs": [
+    "20261024-125543-76c2fadb",
+    "20261024-134526-b750c248",
+    "20261024-144147-42dd2f74",
+    "20261024-132801-9bc6963a",
+    "20261024-144544-57579fc8",
+    "20261024-153029-624b8cd0",
+    "20261024-151720-3532794c",
+    "20261024-160003-adb2710f",
+    "20261024-161142-deffa1a3",
+    "20261024-163601-c34f97a7",
+    "20261024-165743-7ab80723",
+    "20261024-172139-98227b72",
+    "20261024-232858-74c9dbad",
+    "20261024-235851-ac2b690f",
+    "20261025-005839-1ddcda20"
+  ],
+  "rationale": "The frozen three-seed development comparison is complete. Augmented cross-entropy TCN B has mean 16-case macro-F1 0.82777 versus 0.71124 for unaugmented cross-entropy A and 0.68949 for the forest, which is outside the declared 0.01 simpler-model margin. SupCon plus the same augmentation D averages 0.82689; its paired D-B changes are +0.00239, -0.00401 and -0.00102, failing the declared all-seed and mean-gain rule. Use the predeclared deployment seed 17. These are development results; the held-out test has not influenced this decision."
+}

@@ -1,0 +1,21 @@
+{
+  "version": "prospective-paired-log-recovery-v1",
+  "reason": "Archive invoked before Chrome log finalization; source grew and initial parser failed before reference/QC or candidate scoring. Preserve original stopped archive; derive a separate continuation receipt.",
+  "original_root": "artifacts/local/prospective-paired-v1",
+  "continuation_root": "artifacts/local/prospective-paired-log-recovery-v1",
+  "parent_plan_sha256": "42a885ede594ce523bc3f2b35d223b4806683ffa6fd94dd5c21dea8322821d7f",
+  "session_id": "8cf6a723c11d40ae88b551d10fb98e35",
+  "source_files": {
+    "paired-yt-01-archive.json": "32fa13ac16b8c6d4b7b64e69e32cf48550ba1e9b5c79c5f4f074fff2c3f445fc",
+    "paired-yt-01-attempt.json": "4162a46c9370d94a514b220a6bf6fe10489596f82928aca5f8f0b002952ff44d",
+    "paired-yt-01-capture.json": "bd6c849c2c475df75e08308af5b6237eeb0ea7128ab195d620014b9de7e956b0",
+    "paired-yt-01-intent.json": "0829038cbb19ad8419b3cbbab8e90544c18d4ae397b8341427e7c6b6c9fa50a2",
+    "paired-yt-01-netlog.json": "cec1083c0a4e1fc3528181d326f04e20158a0102673fc42bb5180bbaca58d782",
+    "paired-yt-01-status.json": "72ad5a04fb35843d06937b8685019d481e1a15d4113138c9013f289c0e7d7b2d",
+    "paired-yt-01-timing.json": "a9152f98b47b86013d20fa39a909d649016d6e0d4888d537473b43276dcbef09"
+  },
+  "first_usable_archive_sha256": "e7e8685ebbcc03c89303d19b6b48f33e92e7f32947652bf33f91ea4936dd6489",
+  "projection": "Parse entire completed source up to 1 GiB / 8 million events, keep every original QUIC-reference and UDP-socket event by type only; unchanged retained byte/event caps. Hash original and projection; no time, hostname, model or success filtering.",
+  "rules": "Same four slots, dates, candidate hashes, QC/support, primary metrics and scoring embargo. No new/replacement capture, fitting, calibration or promotion. If same YouTube evidence fails QC/support, stop. Original failed study record remains unchanged.",
+  "future_commands": "Use --root artifacts/local/prospective-paired-log-recovery-v1 for remaining paired_capture commands. Original root remains stopped."
+}

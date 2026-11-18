@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "purpose": "Declared one-session selection follow-up; unchanged training and numeric gates",
+  "train_trials": [
+    "instagram-dev-01",
+    "youtube-dev-01",
+    "instagram-dev-02",
+    "youtube-dev-02",
+    "instagram-dev-03",
+    "instagram-dev-04",
+    "instagram-dev-05",
+    "youtube-dev-03"
+  ],
+  "selection_trials": [
+    "instagram-dev-06",
+    "youtube-dev-04",
+    "youtube-dev-05"
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "minimum_train_per_local_class": {
+    "instagram": 20,
+    "youtube": 12
+  },
+  "minimum_selection_per_local_class": {
+    "instagram": 6,
+    "youtube": 6
+  },
+  "seed": 17,
+  "threads": 2,
+  "epochs": 5,
+  "steps_per_epoch": 50,
+  "batch_size": 64,
+  "local_fraction": 0.25,
+  "learning_rate": 0.0001,
+  "public_selection_per_class": 50,
+  "public_clean_loss_limit": 0.02,
+  "local_macro_f1_gain_minimum": 0.01,
+  "require_local_class_recall_not_worse": true,
+  "forest": {
+    "n_estimators": 32,
+    "max_depth": 12,
+    "min_samples_leaf": 2
+  },
+  "benchmark_calls": 100,
+  "benchmark_warmup": 20,
+  "fitting": "CE only; warm-start TCN and reuse its original training-only normalization; no augmentation or SupCon",
+  "sampling": "75% public / 25% local training mass; local classes equally weighted; random valid prefix budgets; whole sessions kept apart",
+  "selection": "Mean-budget local macro-F1 gain >=0.01 over paired previous forest; original numeric quality/recall/retention guards",
+  "simpler_model": "prefer eligible forest within 0.01 local score if its measured CPU p50 is no worse",
+  "policy": "new candidates always uncommitted until separate calibration; old confidence policy is not transferred",
+  "limits": "One supplemental selection recording only. Seed17 first; fixed repetitions cannot rescue it. No calibration, capture or promotion by this runner.",
+  "split_plan_filename": "browser-selection-followup-v1.json",
+  "local_comparison_bundle": "experiments/browser-adaptation/forward-mass25-seed17/forest/bundle",
+  "local_quality_floor": 0.75,
+  "local_class_recall_floor": 0.65,
+  "minimum_selection_full_prefix_per_class": {
+    "instagram": 3,
+    "youtube": 3
+  },
+  "reference_collection_plan_filename": "browser-selection-followup-v1.json",
+  "followup_protocol_sha256": "8bacececc733c8380a7de0b8d166fcb85803b107ab053650ba41d0a6abf7fadb"
+}

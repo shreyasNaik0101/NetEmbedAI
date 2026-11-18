@@ -1,0 +1,84 @@
+{
+  "version": "ipv6-frozen-evaluation-v1",
+  "declared_utc": "2026-11-05T13:28:47.726930+00:00",
+  "purpose": "Four genuinely new evaluation visits for two frozen forests. No training, policy fitting or automatic activation.",
+  "workflow": "ipv6_frozen_evaluation",
+  "scope": "fresh_evaluation_only",
+  "source_bundle": "experiments/full-real/20261024-151720-3532794c/bundle",
+  "source_artifact_id": "18c43fe12262b81d4a3001df150a278865f3908ddd3aab934822fc0c9e5750fb",
+  "interface": "9",
+  "offset_minutes": 330,
+  "models": {
+    "control": {
+      "bundle": "experiments/ipv6-realdata-pilot-v1/control/bundle",
+      "metadata_sha256": "0fb2255916dc165b0cbf2b07ec8b7480ac4768ddb2a248265af3f443589f4877",
+      "weight_sha256": "fc735ea2f5e821bfba3832a588bdb3e62fde7a0c8f47c55567cb4cd5a2ee0494"
+    },
+    "plus-real-ipv6": {
+      "bundle": "experiments/ipv6-realdata-pilot-v1/plus-real-ipv6/bundle",
+      "metadata_sha256": "0b87d388d91fdeb4c6c87fc8a76ce8a718a02415c69c9346e1d222154b5b0473",
+      "weight_sha256": "78efcee31f1ce49a882283b8d4a585bfbc9c0980e40ace68587a98b811d5eecb"
+    }
+  },
+  "network_context": {
+    "type": "same_user_declared_mobile_hotspot",
+    "connectivity_report": "experiments/ipv6-fresh-evaluation-preflight-20261105-1327/report.json",
+    "connectivity_report_sha256": "4a26c097d14959140669fd62574b2328778fd136fa0ea7012d3f728bdda3b51b",
+    "limits": "Reachability verified, hotspot identity user-declared. No campus/new-network generalization."
+  },
+  "browser_session_policy": "Chrome entirely closed at preparation; reopen normal Chrome after intent, start stripped NetLog, start capture, navigate target. Stop app/log; keep Chrome open until archive verifies lifetimes.",
+  "collection": "Edge app, Wi-Fi9, reference checking ON, longer windows OFF. Normal Chrome, Strip private information NetLog, sensitive/raw bytes OFF. Deliberate Start only, 120s capture cap; target activity60s. No candidate results during collection.",
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "minimum_target_at_10_per_trial": 1,
+  "minimum_target_at_30_per_trial": 1,
+  "minimum_complete_target_ipv6": 1,
+  "eligibility": "Existing browser-reference mapping, socket/packet QC and unchanged measured prefix values; all eligible supported rows retained. No prediction-based exclusions. One complete target IPv6 flow minimum per visit; no arbitrary three-flow yield requirement.",
+  "primary": "10 packets, target-service flows only: average recall equally over the two visits of each service, then equally over services. Compare both frozen forests on identical prefixes. Incidental local-service flows and other budgets are secondary, all retained.",
+  "screen": {
+    "minimum_candidate_class_mean_visit_recall": 0.8,
+    "candidate_primary_no_loss_to_control": true,
+    "candidate_each_class_no_loss_to_control": true
+  },
+  "scoring": "Only after all four usable archives, no interim candidate scores. One write-once paired ranking report. This descriptive screen cannot calibrate confidence or promote the model.",
+  "attempts": "Exactly four slots, two dates, fresh Chrome process per slot; no extra replacement visits. Genuine QC/support failure stops scope. Processor errors preserve same attempt for repair. Day1 YT then IG, day2 IG then YT. Prior training slots remain paused and none count toward evaluation.",
+  "limits": "Small prospective two-service hotspot evaluation, correlated flows/prefixes, only two visits per service. No population reliability, family causality, probability calibration, significance or campus transfer claim. Training and all earlier local outcome datasets excluded. Failed screen ends this scope; no automatic retraining, gate changes, extra seeds or recordings.",
+  "trials": [
+    {
+      "id": "ipv6-eval-yt-01",
+      "target": "youtube",
+      "role": "evaluation",
+      "day": 1,
+      "activity": "Watch a different YouTube video for60s in newly started normal Chrome."
+    },
+    {
+      "id": "ipv6-eval-ig-01",
+      "target": "instagram",
+      "role": "evaluation",
+      "day": 1,
+      "activity": "Scroll feed30s, then watch different Reels30s in newly started normal Chrome."
+    },
+    {
+      "id": "ipv6-eval-ig-02",
+      "target": "instagram",
+      "role": "evaluation",
+      "day": 2,
+      "activity": "On a later local date, scroll feed30s, then watch different Reels30s in newly started normal Chrome."
+    },
+    {
+      "id": "ipv6-eval-yt-02",
+      "target": "youtube",
+      "role": "evaluation",
+      "day": 2,
+      "activity": "On that same later date, watch a different video60s in newly started normal Chrome."
+    }
+  ]
+}

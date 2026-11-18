@@ -1,0 +1,32 @@
+{
+  "source": "recorded_capture",
+  "feature_parity": "parser output; reference comparison required",
+  "flows": [
+    {
+      "schema_version": "1",
+      "packets": [
+        {
+          "iat_ms": 0.0,
+          "direction": 1,
+          "payload_bytes": 1200
+        },
+        {
+          "iat_ms": 8.499999999997954,
+          "direction": -1,
+          "payload_bytes": 135
+        },
+        {
+          "iat_ms": 1.5000000000071623,
+          "direction": 1,
+          "payload_bytes": 1200
+        }
+      ]
+    }
+  ],
+  "counters": {
+    "ignored": 0,
+    "evicted": 0,
+    "frozen": 0,
+    "reordered": 0
+  }
+}

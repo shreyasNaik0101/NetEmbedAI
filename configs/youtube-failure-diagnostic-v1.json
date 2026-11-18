@@ -1,0 +1,20 @@
+{
+  "version": "youtube-failure-diagnostic-v1",
+  "purpose": "Post-hoc diagnosis after failed forest calibration, never a new selection/calibration/final experiment",
+  "observed_before_declaration": "Calibration failed; earlier YouTube starts1250/IPv4, failed batch starts1230/IPv6, confirmed by exact matched browser socket records",
+  "candidate_bundle": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle",
+  "candidate_id": "bd79923fabc4816cc2f15b4f150a5d3b428663c455d0fde3da6ab219eb666d62",
+  "cohorts": [
+    {"root": "artifacts/local/prospective-paired-followup-v1", "trial": "paired-yt-01", "saved_predictions": "paired-predictions.json", "prediction_format": "paired"},
+    {"root": "artifacts/local/prospective-paired-followup-v1", "trial": "paired-yt-followup-01", "saved_predictions": "paired-predictions.json", "prediction_format": "paired"},
+    {"root": "artifacts/local/forest-policy-calibration-recovery-v1", "trial": "forest-cal-yt-01", "saved_predictions": "calibration-local-predictions.json", "prediction_format": "calibration"}
+  ],
+  "budgets": [10, 20, 30],
+  "local_training_inventory": "Only original candidate training rows, checked against its provenance; distribution counts only, no fitting or scoring",
+  "diagnostics": ["unchanged capture replay against saved scores", "exact matched browser socket replay at its own userspace times/order", "raw packet summaries", "matched socket IP-family counts outside model inputs", "first divergent forest split for each size-only sensitivity"],
+  "abstract_sensitivities": [
+    {"name": "replace_exact_1230_with_1250", "from_bytes": 1230, "to_bytes": 1250},
+    {"name": "replace_exact_1250_with_1230", "from_bytes": 1250, "to_bytes": 1230}
+  ],
+  "limits": "Exact-size substitutions only, applied to every selected YouTube flow at each fixed budget. They preserve times/directions but are abstract metadata sensitivities, not corrected captures, protocol simulations or accuracy estimates. No threshold/model/hyperparameter search, fitting, gate relaxation, public data, untouched final records, automatic capture or deployment. Earlier sealed results remain unchanged. These calibration outcomes are now examined diagnostically and cannot be reused as an untouched final test. Endpoint family is diagnostic only; IPs/domains/processes are never model inputs or exported report fields."
+}

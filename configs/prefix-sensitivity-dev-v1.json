@@ -1,0 +1,26 @@
+{
+  "version": "prefix-sensitivity-dev-v1",
+  "declared_utc": "2026-11-10T06:15:46Z",
+  "purpose": "Descriptive fixed-model, first-ten sensitivity; no repair selection or causal claim",
+  "source_bundle": "experiments/spotify-ten-packet-v1/bundle",
+  "source_artifact_id": "fa1f4837e4ae11c9169258ecb20338ae3c0c81c2d206231fb6fe19405b8d8549",
+  "source_weight_sha256": "b5a312fe86850a93fdc1c7b74cbfb6ffa58009e781888bafa5e47062e6f42adf",
+  "baseline_predictions": "experiments/spotify-ten-packet-v1/candidate-predictions.json",
+  "baseline_predictions_sha256": "185cc4bd91cc4990b58ebfecba4bf4fd60279f32659877335021a64444121314",
+  "inputs": {
+    "artifacts/local/browser-development/instagram-dev-06-development-rows.jsonl": "76ae6f066090c57b2a9a819c5d4585ebbb5d2e229f693bbff714add8a4fbcd7a",
+    "artifacts/local/browser-development/youtube-dev-04-development-rows.jsonl": "005fa22c4cebc3b4ca85a824ad13b10d715989d9bc39d87928c0c79dfdeebbd4",
+    "artifacts/local/browser-development/youtube-dev-05-development-rows.jsonl": "86a95efba815656e9e698c7a0e452e76a51e5e822c13957f0e4974e008946e48",
+    "artifacts/local/spotify-data-repair-v1/spotify-dev-01-rows.json": "3eaa25474592b0ca2899f876faa115f08d4d8648e47651c6fa408a0ae61f092e"
+  },
+  "expected_counts": {"youtube": 10, "instagram": 7, "spotify": 4},
+  "budget": 10,
+  "views": {
+    "unchanged": "exact same first10 packet input",
+    "gap_plus_0_1_ms": "add 0.1ms to each of the nine inter-arrival gaps, clip to the schema maximum; first gap remains zero",
+    "gap_minus_0_1_ms": "subtract 0.1ms from each of the nine inter-arrival gaps, clip at zero; first gap remains zero",
+    "first_opposite_direction_swap_within_1_ms": "swap direction-and-size metadata of the first adjacent opposite-direction pair among indices1..9 separated by at most1ms, keeping timestamp slots; no swap when no such pair exists"
+  },
+  "rules": "Each view applies to first10 only, including the swap; there are no future packets, domains or IP/process inputs. Compare unchanged model probabilities/top choice with each view and report counts by class, including unchanged no-swap cases. No fitted weights, threshold selection, data augmentation, extra seeds, scoring public final/calibration or operational accuracy claim.",
+  "limits": "Abstract stress tests, not protocol-preserving network simulation or a faithful Chrome/on-wire reconstruction. Per-gap changes can alter total prefix duration by up to0.9ms. A swap moves each selected metadata record to the other time slot by at most1ms. These are reused exposed development connections on limited networks, not independent visits, out-of-distribution calibration or final accuracy. The final-test and calibration recordings remain entirely excluded. No candidate or default promotion."
+}

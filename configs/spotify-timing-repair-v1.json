@@ -1,0 +1,42 @@
+{
+  "version": "spotify-timing-repair-v1",
+  "declared_utc": "2026-11-06T18:21:09.388Z",
+  "seed": 17,
+  "threads": 2,
+  "forest": {
+    "n_estimators": 32,
+    "max_depth": 12,
+    "min_samples_leaf": 2
+  },
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "training_recipe": "configs/ipv6-realdata-pilot-v1.json",
+  "training_recipe_sha256": "0de33a8b63290f34c1055f273a32a9a31443c47dc335dc49d7cc5a9e2fc1f6f2",
+  "control_bundle": "experiments/ipv6-public-policy-v1/bundle",
+  "control_id": "9878d0818370ede3e9897a9cc654b4ddc0afcd87d41b2d7134ccaf52592b528a",
+  "control_weights_sha256": "78efcee31f1ce49a882283b8d4a585bfbc9c0980e40ace68587a98b811d5eecb",
+  "arms": {
+    "control": "summary-v1",
+    "nearest_ms": "summary-nearest-ms-v1"
+  },
+  "public_selection_per_class": 50,
+  "spotify_root": "artifacts/local/spotify-diagnostic-v1",
+  "spotify_report_sha256": "a3a2832c1d462b460d102b8009f2af4bf95ba199759f68d36ed0a40c56e04299",
+  "gates": {
+    "spotify_min_correct": {
+      "10": 4,
+      "20": 3,
+      "30": 2
+    },
+    "spotify_min_primary_gain": 2,
+    "local_no_macro_f1_loss": true,
+    "local_class_no_recall_loss_each_budget": true,
+    "public_max_macro_f1_loss_each_budget": 0.02,
+    "public_max_class_recall_loss_each_budget": 0.05
+  },
+  "scope": "Exactly two seed17 fits, identical 14000 public + original43 and adopted19 local YT/IG training flows, 75% public/25% class-balanced local weight and identical saved normalizer. Control must reproduce current forest bytes before candidate fit. Candidate applies np.rint ties-to-even to per-gap milliseconds before raw summary features in both training and exported inference. Spotify five exposed flows are diagnostics only, never training. Retention uses original17 local selection flows and first50 public selection/class. No public calibration/test, fresh four-visit evaluation, two live-policy visits, failed prior cohorts, other seeds, tuning, new recordings, confidence transfer or promotion. All gates required; failure stops this scope. Success is only a development candidate pending separate calibration and fresh evaluation. New training dates postdate reused local selection: retrospective development, not prospective accuracy."
+}

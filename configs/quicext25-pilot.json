@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "purpose": "bounded pipeline and transfer pilot; no default promotion or final accuracy claim",
+  "dataset": "CESNET-QUICEXT-25-reference-labelled",
+  "record": "https://zenodo.org/records/17249078",
+  "label_rule_version": "quicext-reference-v2-apex-background",
+  "days": {"train": "20250501", "selection": "20250502", "calibration": "20250503"},
+  "reserved_final_days_not_downloaded": ["20250508", "20250509"],
+  "per_class_caps": {"train": 200, "selection": 100, "calibration": 100},
+  "minimum_class_counts": {"train": 5, "selection": 2, "calibration": 2},
+  "sampling": "first eligible records in official file order per class/day; no prevalence claim",
+  "protected_names": "exclude ECH/ESNI indications, including possible GREASE",
+  "group_rule": "hash nonempty original connection IDs and destination identifier; reject cross-split connection reuse",
+  "pilot_training": {"kind": "tcn", "loss": "ce", "augmentation": false, "seed": 17, "epochs": 2, "batch_size": 64, "threads": 2},
+  "progression": "pilot data integrity and inference checks first; poor class support and this small biased sample preclude promotion; retain existing default and final test"
+}

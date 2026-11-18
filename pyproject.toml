@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools==75.8.0"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "netembed"
+version = "2.0.0"
+description = "Early QUIC service classification with explicit evidence boundaries"
+requires-python = ">=3.11,<3.13"
+dependencies = ["numpy==2.1.3", "torch==2.5.1", "scikit-learn==1.6.1", "fastapi==0.115.8", "uvicorn==0.34.0", "websockets==15.0.1"]
+[project.optional-dependencies]
+dev = ["pytest==8.3.4", "httpx==0.28.1", "ruff==0.9.6"]
+data = ["h5py==3.12.1"]
+parquet = ["pyarrow==21.0.0"]
+[project.scripts]
+netembed = "netembed.cli:main"
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["netembed*"]
+[tool.setuptools.package-data]
+netembed = ["reference_data/*.csv", "reference_data/*.md"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+[tool.ruff]
+line-length = 110
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

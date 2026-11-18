@@ -1,0 +1,93 @@
+{
+  "version": "hotspot-fresh-sessions-v1",
+  "declared_utc": "2026-11-04T12:51:45+00:00",
+  "purpose": "New session-based acquisition design; not a passing reinterpretation of earlier failed flow-count scopes",
+  "source_bundle": "experiments/full-real/20261024-151720-3532794c/bundle",
+  "source_artifact_id": "18c43fe12262b81d4a3001df150a278865f3908ddd3aab934822fc0c9e5750fb",
+  "interface": "9",
+  "offset_minutes": 330,
+  "trials": [
+    {
+      "id": "fresh-yt-01",
+      "target": "youtube",
+      "role": "train",
+      "day": 1,
+      "activity": "Fresh Chrome process; one different YouTube video60s."
+    },
+    {
+      "id": "fresh-ig-01",
+      "target": "instagram",
+      "role": "train",
+      "day": 1,
+      "activity": "Fresh Chrome process; feed30s and different Reels30s."
+    },
+    {
+      "id": "fresh-yt-02",
+      "target": "youtube",
+      "role": "train",
+      "day": 2,
+      "activity": "Fresh Chrome process; one different YouTube video60s."
+    },
+    {
+      "id": "fresh-ig-02",
+      "target": "instagram",
+      "role": "train",
+      "day": 2,
+      "activity": "Fresh Chrome process; feed30s and different Reels30s."
+    },
+    {
+      "id": "fresh-yt-03",
+      "target": "youtube",
+      "role": "train",
+      "day": 2,
+      "activity": "Fresh Chrome process; one different YouTube video60s."
+    },
+    {
+      "id": "fresh-ig-03",
+      "target": "instagram",
+      "role": "train",
+      "day": 2,
+      "activity": "Fresh Chrome process; feed30s and different Reels30s."
+    }
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "minimum_target_at_10_per_trial": 1,
+  "minimum_target_at_30_per_trial": 1,
+  "eligibility": "mapped-valid-prefix-v1; all supported mapped flows retained; ambiguous/unmapped inventory preserved; no prediction-based exclusion",
+  "collection": "Normal Chrome and Edge app visible; Wi-Fi; reference checkbox on; longer-window statistics off; Strip private information NetLog, sensitive/raw bytes off; cap 120 seconds. User starts both logs before fresh target navigation.",
+  "attempts": "Six fixed visits, three per service over two dates; one stopped attempt per visit. Stop on genuine QC/session/coverage failure; preserve same capture on processor failures. No unbounded retakes. At least one complete IPv6 target flow per visit; preserve all eligible flows.",
+  "limits": "All prior failed scopes and data roles remain unchanged; their visits do not count as fresh sessions. Explicitly revised support rule in a new scope, not a relaxed pass for old data. No endpoint/process/domain identities in classifier inputs. User-declared hotspot domain; future campus transfer unverified. No automatic capture, browser termination or system setting changes.",
+  "workflow": "family_development",
+  "candidate": {
+    "bundle": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle",
+    "metadata": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle/metadata.json",
+      "sha256": "bd79923fabc4816cc2f15b4f150a5d3b428663c455d0fde3da6ab219eb666d62"
+    }
+  },
+  "candidate_weight_sha256": "fc735ea2f5e821bfba3832a588bdb3e62fde7a0c8f47c55567cb4cd5a2ee0494",
+  "family_rules": {
+    "training_family": 6,
+    "minimum_per_visit_complete_ipv6_flows": 1,
+    "minimum_distinct_visits_per_class": 3,
+    "training_dates": 2
+  },
+  "scoring": "Acquisition only. No model fitting, selection, calibration, final scoring, training freeze or promotion. Visit counts, not incidental connections in one video, define support. Browser process lifetimes prove restarts but not statistical independence. Future training needs a separate declaration.",
+  "scope": "session_acquisition_only",
+  "network_context": {
+    "type": "user_declared_mobile_hotspot",
+    "connectivity_report": "experiments\\fresh-session-hotspot-check-v1\\report.json",
+    "connectivity_report_sha256": "90624fe303cc7662535654e25771a1859da422332720add4f8867f7e53cdac17",
+    "limits": "Different network domain; not a controlled IPv4/IPv6 causal comparison or campus quality evidence. No SSID or addresses used as model inputs."
+  },
+  "browser_session_policy": "All Chrome processes closed at preparation; after intent, reopen normal Chrome, start NetLog, start app capture, navigate target. Stop app/log, keep Chrome open until archive verifies process lifetimes. No automatic browser closure or startup."
+}

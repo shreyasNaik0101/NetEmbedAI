@@ -1,0 +1,9 @@
+{
+  "kind": "tcn",
+  "loss": "ce",
+  "augmentation": false,
+  "seed": 17,
+  "epochs": 20,
+  "batch_size": 64,
+  "threads": 2
+}

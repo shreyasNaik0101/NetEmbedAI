@@ -1,0 +1,124 @@
+{
+  "version": "family-development-v1",
+  "declared_utc": "2026-11-04T10:49:19+00:00",
+  "purpose": "Bounded real IPv6 training coverage and four-cell development; old protocols remain closed",
+  "source_bundle": "experiments/full-real/20261024-151720-3532794c/bundle",
+  "source_artifact_id": "18c43fe12262b81d4a3001df150a278865f3908ddd3aab934822fc0c9e5750fb",
+  "interface": "9",
+  "offset_minutes": 330,
+  "trials": [
+    {
+      "id": "family-train-yt-01",
+      "target": "youtube",
+      "role": "train",
+      "day": 1,
+      "activity": "Watch a different YouTube video for 60 seconds."
+    },
+    {
+      "id": "family-train-ig-01",
+      "target": "instagram",
+      "role": "train",
+      "day": 1,
+      "activity": "Scroll feed30 seconds, then watch different Reels30 seconds."
+    },
+    {
+      "id": "family-train-yt-02",
+      "target": "youtube",
+      "role": "train",
+      "day": 2,
+      "activity": "Watch a different YouTube video for 60 seconds."
+    },
+    {
+      "id": "family-train-ig-02",
+      "target": "instagram",
+      "role": "train",
+      "day": 2,
+      "activity": "Scroll feed30 seconds, then watch different Reels30 seconds."
+    },
+    {
+      "id": "family-select-yt-01",
+      "target": "youtube",
+      "role": "selection",
+      "day": 3,
+      "activity": "Watch a different YouTube video for 60 seconds."
+    },
+    {
+      "id": "family-select-ig-01",
+      "target": "instagram",
+      "role": "selection",
+      "day": 3,
+      "activity": "Scroll feed30 seconds, then watch different Reels30 seconds."
+    },
+    {
+      "id": "family-select-yt-02",
+      "target": "youtube",
+      "role": "selection",
+      "day": 4,
+      "activity": "Watch a different YouTube video for 60 seconds."
+    },
+    {
+      "id": "family-select-ig-02",
+      "target": "instagram",
+      "role": "selection",
+      "day": 4,
+      "activity": "Scroll feed30 seconds, then watch different Reels30 seconds."
+    }
+  ],
+  "local_labels": [
+    "youtube",
+    "instagram"
+  ],
+  "budgets": [
+    5,
+    10,
+    20,
+    30
+  ],
+  "minimum_target_at_10_per_trial": 3,
+  "minimum_target_at_30_per_trial": 1,
+  "eligibility": "mapped-valid-prefix-v1; all supported mapped flows retained; ambiguous/unmapped inventory preserved; no prediction-based exclusion",
+  "collection": "Normal Chrome and Edge app visible; Wi-Fi; reference checkbox on; longer-window statistics off; Strip private information NetLog, sensitive/raw bytes off; cap 120 seconds. User starts both logs before fresh target navigation.",
+  "attempts": "Eight fixed slots, one stopped attempt each. Coverage/QC failure stops; processing error preserves same attempt.",
+  "limits": "Development only, no policy/final/default activation. Natural family coverage must be verified from browser sockets. No family/IP/domain/process features. Old calibration/comparison stays excluded. Selection blocked until training is frozen and a bound seed17 model exists.",
+  "workflow": "family_development",
+  "candidate": {
+    "bundle": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle",
+    "metadata": {
+      "path": "experiments/browser-adaptation/selection-followup-v1-seed17/forest/bundle/metadata.json",
+      "sha256": "bd79923fabc4816cc2f15b4f150a5d3b428663c455d0fde3da6ab219eb666d62"
+    }
+  },
+  "candidate_weight_sha256": "fc735ea2f5e821bfba3832a588bdb3e62fde7a0c8f47c55567cb4cd5a2ee0494",
+  "family_rules": {
+    "training_family": 6,
+    "minimum_per_cell_at10": 3,
+    "minimum_per_cell_at30": 1
+  },
+  "training_recipe": {
+    "public_flows": 14000,
+    "preserve_original_local_flows": 43,
+    "local_mass": 0.25,
+    "forest": {
+      "n_estimators": 32,
+      "max_depth": 12,
+      "min_samples_leaf": 2
+    },
+    "feature_map": "summary-v1",
+    "augmentation": null,
+    "seeds": [
+      17,
+      42,
+      123
+    ]
+  },
+  "development_gates": {
+    "primary10_cell_recall_min": 0.75,
+    "primary10_cell_no_regression": true,
+    "local_mean_prefix_f1_min": 0.75,
+    "local_f1_gain_min": 0.01,
+    "local_class_no_regression": true,
+    "public_f1_loss_max": 0.02,
+    "public_class_recall_loss_max": 0.05
+  },
+  "scoring": "Collector performs reference/source-replay/QC and family coverage only. Future candidate evaluation requires all four selection archives, all four service/family cells, and frozen training/model binding. No old calibration/comparison data."
+}
