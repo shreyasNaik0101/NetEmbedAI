@@ -108,6 +108,12 @@ def test_server_heartbeat_keeps_timerless_viewer_alive_and_releases_on_close(mon
             assert replies >= 3
             assert client.get("/capture/status").json()["viewer_connected"]
             assert not client.get("/capture/status").json()["running"]
+        # Closing the client starts server cleanup asynchronously. Wait for
+        # ownership to be released before asking a new viewer to connect.
+        deadline = time.monotonic() + 2
+        while client.get("/capture/status").json()["viewer_connected"]:
+            assert time.monotonic() < deadline, "viewer ownership was not released"
+            time.sleep(0.01)
         with client.websocket_connect("/capture/events", headers={"Origin": "http://localhost:5173"}) as ws:
             # A queued status is legitimate after the previous viewer's stop.
             # Ownership release must not depend on which message arrives first.
