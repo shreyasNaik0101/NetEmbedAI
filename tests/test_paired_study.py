@@ -7,6 +7,29 @@ from netembed.bundle import sha256, write_json
 from netembed.paired_study import check_order, read_archive, read_plan, summarize, support
 
 
+@pytest.mark.parametrize(
+    "plan,constant",
+    [
+        ("prospective-paired-v1", "CONFIG_SHA"),
+        ("prospective-paired-followup-v1", "FOLLOWUP_SHA"),
+        ("forest-policy-calibration-v1", "CALIBRATION_SHA"),
+        ("family-development-v1", "FAMILY_SHA"),
+        ("hotspot-family-feasibility-v1", "HOTSPOT_SHA"),
+        ("hotspot-fresh-sessions-v1", "FRESH_SHA"),
+        ("ipv6-frozen-evaluation-v1", "IPV6_EVALUATION_SHA"),
+        ("ipv6-live-policy-v1", "LIVE_POLICY_SHA"),
+        ("spotify-data-repair-v1", "SPOTIFY_REPAIR_SHA"),
+        ("ten-packet-fresh-v1", "TEN_FRESH_SHA"),
+        ("ten-packet-fresh-continuation-v1", "TEN_CONTINUATION_SHA"),
+        ("ten-packet-policy-v1", "TEN_POLICY_SHA"),
+    ],
+)
+def test_frozen_plan_bytes_match_archive_binding(plan, constant):
+    from netembed import paired_study
+
+    assert sha256(f"configs/{plan}.json") == getattr(paired_study, constant)
+
+
 def test_status_checks_evidence_and_date_without_loading_models(tmp_path):
     from netembed.paired_study import CONFIG_SHA, collection_status
 

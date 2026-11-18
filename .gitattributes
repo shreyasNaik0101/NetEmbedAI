@@ -1,3 +1,5 @@
 # Preserve the checksum-verified upstream reference bytes on every OS.
 src/netembed/reference_data/servicemap.csv -text whitespace=cr-at-eol
 tests/fixtures/rfc9001.ipfixprobe.stdout.txt -text
+# Study declarations are byte-hashed and must keep their committed LF endings.
+configs/*.json text eol=lf
